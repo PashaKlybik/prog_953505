@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <Windows.h>
 
-typedef struct Node // узел дерева
+typedef struct Node // СѓР·РµР» РґРµСЂРµРІР°
 {
 	int data;
 	struct Node* left;
@@ -21,42 +21,42 @@ int main()
 {
 	Node* root1 = NULL;
 	Node* root2 = NULL;
-	Node** currentRoot = &root1; // указатель на текущий корень
+	Node** currentRoot = &root1; // СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‚РµРєСѓС‰РёР№ РєРѕСЂРµРЅСЊ
 
 	char buff[1000];
 
 	char key = 'q';
 	int data;
 
-	// диалоговое меню
+	// РґРёР°Р»РѕРіРѕРІРѕРµ РјРµРЅСЋ
 	do
 	{
 		system("cls");
 
 		if (currentRoot == &root1)
 		{
-			// установка цвета на светло-зеленый для последующего текста
+			// СѓСЃС‚Р°РЅРѕРІРєР° С†РІРµС‚Р° РЅР° СЃРІРµС‚Р»Рѕ-Р·РµР»РµРЅС‹Р№ РґР»СЏ РїРѕСЃР»РµРґСѓСЋС‰РµРіРѕ С‚РµРєСЃС‚Р°
 			SetGreenColor();
 		}
-		// вывод первого дерева (повернуто на 90 градусов против часовой)
+		// РІС‹РІРѕРґ РїРµСЂРІРѕРіРѕ РґРµСЂРµРІР° (РїРѕРІРµСЂРЅСѓС‚Рѕ РЅР° 90 РіСЂР°РґСѓСЃРѕРІ РїСЂРѕС‚РёРІ С‡Р°СЃРѕРІРѕР№)
 		printf("Tree1 : \n===============================\n\n");
 		PrintInRightOrder(&root1, 0);
 		printf("\n===============================\n");
 
-		// установка цвета на белый для последующего текста
+		// СѓСЃС‚Р°РЅРѕРІРєР° С†РІРµС‚Р° РЅР° Р±РµР»С‹Р№ РґР»СЏ РїРѕСЃР»РµРґСѓСЋС‰РµРіРѕ С‚РµРєСЃС‚Р°
 		SetWhiteColor();
 
 		if (currentRoot == &root2)
 		{
-			// установка цвета на светло-зеленый для последующего текста
+			// СѓСЃС‚Р°РЅРѕРІРєР° С†РІРµС‚Р° РЅР° СЃРІРµС‚Р»Рѕ-Р·РµР»РµРЅС‹Р№ РґР»СЏ РїРѕСЃР»РµРґСѓСЋС‰РµРіРѕ С‚РµРєСЃС‚Р°
 			SetGreenColor();
 		}
-		// вывод второго дерева (повернуто на 90 градусов против часовой)
+		// РІС‹РІРѕРґ РІС‚РѕСЂРѕРіРѕ РґРµСЂРµРІР° (РїРѕРІРµСЂРЅСѓС‚Рѕ РЅР° 90 РіСЂР°РґСѓСЃРѕРІ РїСЂРѕС‚РёРІ С‡Р°СЃРѕРІРѕР№)
 		printf("\nTree2 : \n===============================\n\n");
 		PrintInRightOrder(&root2, 0);
 		printf("\n===============================\n");
 
-		// установка цвета на белый для последующего текста
+		// СѓСЃС‚Р°РЅРѕРІРєР° С†РІРµС‚Р° РЅР° Р±РµР»С‹Р№ РґР»СЏ РїРѕСЃР»РµРґСѓСЋС‰РµРіРѕ С‚РµРєСЃС‚Р°
 		SetWhiteColor();
 
 		printf("\n'a' - add\n'c' - clear\n's' - switch the tree\n'm' - merge Tree2 with Tree1\n'q' - quite\n");
@@ -101,7 +101,7 @@ int main()
 	return 0;
 }
 
-void Add(Node** root, int data, int mergeFlag) // добавление узла
+void Add(Node** root, int data, int mergeFlag) // РґРѕР±Р°РІР»РµРЅРёРµ СѓР·Р»Р°
 {
 	if (*root == NULL)
 	{
@@ -128,7 +128,7 @@ void Add(Node** root, int data, int mergeFlag) // добавление узла
 	}
 }
 
-void Clear(Node** root, int level) // очистка дерева
+void Clear(Node** root, int level) // РѕС‡РёСЃС‚РєР° РґРµСЂРµРІР°
 {
 	if (level == 0 && *root == NULL) return;
 
@@ -142,7 +142,7 @@ void Clear(Node** root, int level) // очистка дерева
 	else *root = NULL;
 }
 
-void Merge(Node** root1, Node** root2) // слияние втоорого дерева с первым
+void Merge(Node** root1, Node** root2) // СЃР»РёСЏРЅРёРµ РІС‚РѕРѕСЂРѕРіРѕ РґРµСЂРµРІР° СЃ РїРµСЂРІС‹Рј
 {
 	if ((*root2)->right != NULL)
 	{
@@ -157,7 +157,7 @@ void Merge(Node** root1, Node** root2) // слияние втоорого дерева с первым
 	}
 }
 
-void PrintInRightOrder(Node** root, int level) // вывод дерева (повернуто против часовой на 90 градусов)
+void PrintInRightOrder(Node** root, int level) // РІС‹РІРѕРґ РґРµСЂРµРІР° (РїРѕРІРµСЂРЅСѓС‚Рѕ РїСЂРѕС‚РёРІ С‡Р°СЃРѕРІРѕР№ РЅР° 90 РіСЂР°РґСѓСЃРѕРІ)
 {
 	if (level == 0 && *root == NULL) return;
 
@@ -171,7 +171,7 @@ void PrintInRightOrder(Node** root, int level) // вывод дерева (повернуто против
 		PrintInRightOrder(&(*root)->left, level + 1);
 }
 
-int CheckInputInt(char buff[]) { // проверка на правильность ввода значения узла 
+int CheckInputInt(char buff[]) { // РїСЂРѕРІРµСЂРєР° РЅР° РїСЂР°РІРёР»СЊРЅРѕСЃС‚СЊ РІРІРѕРґР° Р·РЅР°С‡РµРЅРёСЏ СѓР·Р»Р° 
 	int find_char, i, n;
 
 	while (1) {
@@ -193,13 +193,13 @@ int CheckInputInt(char buff[]) { // проверка на правильность ввода значения узла
 	return n;
 }
 
-void SetGreenColor() // светло-зеленый цвет в консоли
+void SetGreenColor() // СЃРІРµС‚Р»Рѕ-Р·РµР»РµРЅС‹Р№ С†РІРµС‚ РІ РєРѕРЅСЃРѕР»Рё
 {
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(handle, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 }
 
-void SetWhiteColor() // белый цвет в консоли
+void SetWhiteColor() // Р±РµР»С‹Р№ С†РІРµС‚ РІ РєРѕРЅСЃРѕР»Рё
 {
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
