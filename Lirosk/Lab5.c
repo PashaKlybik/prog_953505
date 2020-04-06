@@ -1,28 +1,19 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdlib.h>
-#include <string.h>
 #include <stdio.h>
 
-typedef unsigned short ush;
 typedef unsigned long ul;
+typedef unsigned char uc;
 
-typedef struct num
+typedef struct list
 {
-    struct num* pNext;
-    struct num* pPrev;
-    ush digit;
-} numS;
+    struct list* pNext;
+    struct list* pPrev;
+    uc staff;
+} list;
 
-typedef struct string
-{
-    struct string* pNext;
-    struct string* pPrev;
-    char staff;
-} string;
-
-void FreeNum(numS*, numS*);
-void FreeStrS(string*, string*);
+void FreeList(list*, list*);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
@@ -34,8 +25,8 @@ int main()
 {
     FILE* data;
     FILE* rez;
-    data = fopen("...\\num.txt","r");  //number to convert
-    rez = fopen("...\\rez.bin","w");   //result
+    data = fopen("...\\num.txt", "r");  //number to convert
+    rez = fopen("...\\rez.bin", "w");   //result
 
     if (!data)
     {
@@ -49,31 +40,32 @@ int main()
 
     fseek(data, 0, SEEK_END);
     ul len = ftell(data);
-    char* str = (char* )malloc(sizeof(char)*(len + 1));
+    char* str = (char*)malloc(sizeof(char) * (len + 1));
 
     fseek(data, 0, SEEK_SET);
-    fgets(str,len + 1,data);
+    fgets(str, len + 1, data);
 
     fclose(data);
 
-    numS* num = (numS* )malloc(sizeof(numS));
+    list* num = (list*)malloc(sizeof(list));
     if ((str[0] < '0') || (str[0] > '9'))
     {
-        num->digit = 0;
+        num->staff = 0;
     }
     else
     {
-        num->digit = str[0] - '0';
+        num->staff = str[0] - '0';
     }
-    num->pPrev = (numS*)malloc(sizeof(numS));;
+
+    num->pPrev = (list*)malloc(sizeof(list));
     num->pPrev->pNext = num;
 
-    numS* tale = num;
+    list* tale = num;
     {
         unsigned int numOfNaN = 0;
         for (ul i = 1; i < len; i++, tale = tale->pNext)
         {
-            tale->pNext = (numS* )malloc(sizeof(numS));
+            tale->pNext = (list*)malloc(sizeof(list));
             tale->pNext->pPrev = tale;
             if ((str[i] < '0') || (str[i] > '9'))
             {
@@ -81,8 +73,7 @@ int main()
                 tale = tale->pPrev;
                 continue;
             }
-            tale->pNext->digit = str[i] - '0';
-            
+            tale->pNext->staff = str[i] - '0';
         }
         len -= numOfNaN;
     }
@@ -92,29 +83,28 @@ int main()
 
     free(str);
 
-    string* strS = (string* )malloc(sizeof(string));
+    list* strS = (list*)malloc(sizeof(list));
     strS->pPrev = NULL;
-    string* taleStr = strS;
+    list* taleStr = strS;
     {
-        //string* p = strS;
-        for (numS* zero = num ; zero;)
+        for (list* zero = num; zero;)
         {
-            taleStr->staff = tale->digit % 2 + '0';
-            taleStr->pNext = (string* )malloc(sizeof(string));
+            taleStr->staff = tale->staff % 2 + '0';
+            taleStr->pNext = (list*)malloc(sizeof(list));
             taleStr->pNext->pPrev = taleStr;
             taleStr = taleStr->pNext;
 
-            for (numS* pN = zero; pN; pN = pN->pNext)
+            for (list* pN = zero; pN; pN = pN->pNext)
             {
-                if ((pN->digit % 2 == 1) && (pN->pNext))
+                if ((pN->staff % 2 == 1) && (pN->pNext))
                 {
-                    pN->pNext->digit += 10;
+                    pN->pNext->staff += 10;
                 }
 
-                pN->digit /= 2;
+                pN->staff /= 2;
             }
 
-            if (!zero->digit)
+            if (!zero->staff)
             {
                 zero = zero->pNext;
             }
@@ -124,38 +114,27 @@ int main()
         free(taleStr->pNext);
     }
 
-    for (string* p = taleStr; p; p = p->pPrev)
+    for (list* p = taleStr; p; p = p->pPrev)
     {
         fprintf(rez, "%c", p->staff);
     }
 
-    FreeNum(num, tale);
-    FreeStrS(strS, taleStr);
+    FreeList(num, tale);
+    FreeList(strS, taleStr);
     fclose(rez);
 
     printf("end...");
-    system("exit");
     return 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void FreeNum(numS* num, numS* tale)
+void FreeList(list* listS, list* tale)
 {
-    for (numS* p = tale; p->pPrev;)
+    for (list* p = tale; p->pPrev;)
     {
         p = p->pPrev;
         free(p->pNext);
     }
-    free(num);
-}
-
-void FreeStrS(string* strS, string* taleStr)
-{
-    for (string* p = taleStr; p->pPrev;)
-    {
-        p = p->pPrev;
-        free(p->pNext);
-    }
-    free(strS);
+    free(listS);
 }
