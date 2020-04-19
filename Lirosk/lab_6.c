@@ -33,7 +33,7 @@ int main()
 	node* tree = NULL;
 
 	//entering and checking numbers
-	puts("Enter numbers > 0, 9 symbols max ('0' to stop):\n\n");
+	puts("Enter numbers, 9 symbols max ('0' to stop):\n\n");
 	{
 		char buf[256];
 		int temp = 1;
