@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef unsigned long ui;
-typedef unsigned short us;
 typedef unsigned char uc;
 
 typedef struct node
@@ -35,10 +33,10 @@ int main()
 	node* tree = NULL;
 
 	//entering and checking numbers
-	puts("Enter numbers > 0, 10 symbols max ('0' to stop):\n\n");
+	puts("Enter numbers > 0, 9 symbols max ('0' to stop):\n\n");
 	{
 		char buf[256];
-		ui temp = 1;
+		int temp = 1;
 
 		while (1)
 		{
@@ -68,7 +66,7 @@ int main()
 
 	int sumL = sumOfLongestL(tree, h), sumR = sumOfLongestR(tree, h);
 
-	if ((sumL != 0) ^ (sumR != 0))
+	if (((sumL != 0) ^ (sumR != 0)) || sumL == sumR)
 	{
 		if (sumL)
 		{
@@ -85,7 +83,6 @@ int main()
 	}
 
 	freeTree(&tree);
-	printTree(tree, 0);
 	return 0;
 }
 
@@ -131,7 +128,7 @@ int sumOfLongestR(node* tree, const uc height)
 }
 
 
-//sum of longest sub-tree, left sub-tree 1st checked
+//sum of longest sub-tree, left sub-tree is 1st checked
 int sumOfLongestL(node* tree, const uc height)
 {
 	if (!tree)
@@ -231,7 +228,7 @@ void printTree(node* tree, int level)
 //checking input
 uc check(char* str)
 {
-	if (strlen(str) > 11)
+	if (strlen(str) > 10)
 	{
 		return 0;
 	}
