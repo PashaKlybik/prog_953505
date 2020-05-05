@@ -1,3 +1,0 @@
-﻿  laba5.cpp
-C:\Users\Andrei\Desktop\labsC\laba5\laba5\laba5.cpp(31,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  laba5.vcxproj -> C:\Users\Andrei\Desktop\labsC\laba5\Debug\laba5.exe
