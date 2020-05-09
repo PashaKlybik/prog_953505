@@ -1,4 +1,4 @@
-// var 6
+// var 10
 #include <stdio.h>
 typedef struct node {
 	char data[100];
