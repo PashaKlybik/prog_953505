@@ -1,3 +1,4 @@
+// var 6
 #include <stdio.h>
 #include <time.h>
 
