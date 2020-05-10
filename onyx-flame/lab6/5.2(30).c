@@ -88,6 +88,16 @@ void FillTree(Item** root, char* str)
     }
 }
 
+void DeleteTree(Item* root) //функция очистки дерева
+{
+    if(root != NULL) //спускаемся вниз по дереву и рекурсивно удаляем элементы
+    {
+        DeleteTree(root->left);
+        DeleteTree(root->right);
+        free(root);
+    }
+}
+
 int main()
 {
     system("chcp 1251");
@@ -110,5 +120,6 @@ int main()
     {
         printf("Дерево пустое!\n");
     }
+    DeleteTree(root);   //очистка дерева
     return 0;
 }
