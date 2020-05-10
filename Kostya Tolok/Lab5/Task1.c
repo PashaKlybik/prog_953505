@@ -82,6 +82,24 @@ void DeleteFromQueue(struct Queue* q)
 	q->start = q->start->next;
 	free(temp);
 }
+struct List* DeleteHead(struct List* root)
+{
+	struct List* temp;
+	temp = root->next;
+	temp->prev = NULL;
+	free(root);
+	return(temp);
+}
+struct List* ClearList(struct List* list)
+{
+	while (list->next)
+	{
+		list = DeleteHead(list);
+	}
+	free(list);
+	list = NULL;
+	return list;
+}
 int main(void)
 {
 	srand(time(0));
@@ -148,4 +166,5 @@ int main(void)
 	}
 	printf("\nList:\n");
 	ListPrint(list);
+	list = ClearList(list);
 }
