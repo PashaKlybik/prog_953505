@@ -73,8 +73,8 @@ void Delete(Tree *p)
 {
   if (p != NULL)
   {
-    Delete(p->left);
-    Delete(p->right);
+   free(p->left);
+   free(p->right);
 	delete p;
   }
 }
