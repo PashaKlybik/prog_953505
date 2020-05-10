@@ -206,7 +206,7 @@ void Delete(Item *p)
   if (p != NULL)
   {
     Delete(p->next);
-    delete p;
+    free(p);
   }
 }
 int main() {
