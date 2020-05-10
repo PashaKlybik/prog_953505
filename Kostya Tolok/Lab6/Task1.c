@@ -181,6 +181,14 @@ TreeNode* FindNode(TreeNode* node, int amount)
 		return node;
 	}
 }
+List* DeleteHead(List* root)
+{
+	struct List* temp;
+	temp = root->next;
+	temp->prev = NULL;
+	free(root);
+	return(temp);
+}
 int main()
 {
 	srand(time(0));
@@ -206,8 +214,13 @@ int main()
 	for (int i = 0; i < amount; i++)
 	{
 		tree = AddToTree(tree, list->data, NULL);
-		list = list->next;
+		if (list->next)
+		{
+			list = DeleteHead(list);
+		}
 	}
+	free(list);
+	list = NULL;
 	printf("\nTree:\n");
 	PrintTree(tree);
 	tree = FindNode(tree, amount);
