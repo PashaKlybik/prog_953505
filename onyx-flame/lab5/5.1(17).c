@@ -47,7 +47,7 @@ void Push(Stack* st, int x)     //добавление элемента в ст�
     st->count++;    //инкрементируем счетчик
 }
 
-void pop(Stack* st)     //удаление элемента из стека
+void Pop(Stack* st)     //удаление элемента из стека
 {
     Node* temp = st->head;      //устанавливаем указатель на текущую вершину
     st->head = st->head->pNext;    //элемент, стоящий после текущей вершины, объявляем новой вершиной
@@ -222,19 +222,19 @@ Stack* GetMergedStack(Stack* stack1, Stack* stack2) //объединение д�
             if(isEmpty == 1)
             {
                 Push(temp, Peek(stack1));
-                pop(stack1);
+                Pop(stack1);
                 isEmpty = 0;
             }
             else
             {
                 if(Peek(stack1) == Peek(temp))
                 {
-                    pop(stack1);
+                    Pop(stack1);
                 }
                 else
                 {
                     Push(temp,Peek(stack1));
-                    pop(stack1);
+                    Pop(stack1);
                 }
             }
         }
@@ -243,22 +243,22 @@ Stack* GetMergedStack(Stack* stack1, Stack* stack2) //объединение д�
             if(isEmpty == 1)
             {
                 Push(temp, Peek(stack1));
-                pop(stack1);
-                pop(stack2);
+                Pop(stack1);
+                Pop(stack2);
                 isEmpty = 0;
             }
             else
             {
                 if(Peek(stack1) == Peek(temp))
                 {
-                    pop(stack1);
-                    pop(stack2);
+                    Pop(stack1);
+                    Pop(stack2);
                 }
                 else
                 {
                     Push(temp,Peek(stack1));
-                    pop(stack1);
-                    pop(stack2);
+                    Pop(stack1);
+                    Pop(stack2);
                 }
             }
         }
@@ -267,19 +267,19 @@ Stack* GetMergedStack(Stack* stack1, Stack* stack2) //объединение д�
             if(isEmpty == 1)
             {
                 Push(temp, Peek(stack2));
-                pop(stack2);
+                Pop(stack2);
                 isEmpty = 0;
             }
             else
             {
                 if(Peek(stack2) == Peek(temp))
                 {
-                    pop(stack2);
+                    Pop(stack2);
                 }
                 else
                 {
                     Push(temp,Peek(stack2));
-                    pop(stack2);
+                    Pop(stack2);
                 }
             }
         }
@@ -290,12 +290,12 @@ Stack* GetMergedStack(Stack* stack1, Stack* stack2) //объединение д�
         {
             if(Peek(stack2) == Peek(temp))
             {
-                pop(stack2);
+                Pop(stack2);
             }
             else
             {
                 Push(temp,Peek(stack2));
-                pop(stack2);
+                Pop(stack2);
             }
         }
     }
@@ -305,12 +305,12 @@ Stack* GetMergedStack(Stack* stack1, Stack* stack2) //объединение д�
         {
             if(Peek(stack1) == Peek(temp))
             {
-                pop(stack1);
+                Pop(stack1);
             }
             else
             {
                 Push(temp,Peek(stack1));
-                pop(stack1);
+                Pop(stack1);
             }
         }
     }
@@ -318,11 +318,18 @@ Stack* GetMergedStack(Stack* stack1, Stack* stack2) //объединение д�
     while(temp->head != NULL)   //инвертируем результ.стек
     {
         Push(result, Peek(temp));
-        pop(temp);
+        Pop(temp);
     }
     return result;
 }
 
+void FreeStack(Stack* t)    //очистка стека
+{
+    while(t->count != 0)    //пока количество элементов не тсанет равным 0, делаем Pop
+    {
+        Pop(st);
+    }
+}
 int main()
 {
     setlocale(LC_ALL, "Russian");
@@ -344,17 +351,19 @@ int main()
             str[i] = '\0'; //ставим нуль-терминатор в конце
             if(k == 0)  //если так, заполняем первый стек
             {
-                if(FillStack(st1,str) == 0) //если функция возвращает 0, ошибка, завершение функции
+                if(FillStack(st1,str) == 0) //если функция возвращает 0, ошибка, очистка стека, завершение функции
                 {
                     printf("Error in the first stack!");
+                    FreeStack(st1);
                     return 0;
                 }
             }
             else if(k == 1) //заполнение второго стека
             {
-                if(FillStack(st2,str) == 0) //если функция возвращает 0, ошибка, завершение функции
+                if(FillStack(st2,str) == 0) //если функция возвращает 0, ошибка, очистка стека, завершение функции
                 {
                     printf("Error in the second stack!");
+                    FreeStack(st2);
                     return 0;
                 }
             }
@@ -380,7 +389,6 @@ int main()
     Stack* res = GetMergedStack(st1,st2);
     printf("Merged stack:\n");
     Print(res);
-    //При использовании данных из файла результат будет таким:
-    //139 120 115 102 98 89 67 54 32 30 24 22 19 15 12 9 8 6 5 2 1 -5 -15
+    FreeStack(res); //удаление стека
     return 0;
 }
