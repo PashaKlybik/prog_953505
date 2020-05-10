@@ -17,6 +17,7 @@ MNumber CreateMNumber(char* initStr);
 void AddDigit(MNumber* number, int digit);
 void PrintMNumber(MNumber number);
 MNumber Divide(MNumber number, int x);
+void Delete(Item *p);
 int IsDivisible(MNumber number, int x);
 MNumber SumMNumber(MNumber n1, MNumber n2);
 MNumber CreateMNumber(char initStr[])
@@ -200,6 +201,14 @@ MNumber SumMNumber(MNumber n1, MNumber n2)
 	if (pos) AddDigit(&sum, pos);
 	return sum;
 }
+void Delete(Item *p)
+{
+  if (p != NULL)
+  {
+    Delete(p->next);
+    delete p;
+  }
+}
 int main() {
 	MNumber first = CreateMNumber("22222222222");
 	PrintMNumber(first);
@@ -209,5 +218,7 @@ int main() {
 	Decomposition(first);
 	printf("\n\n");
 	Decomposition(second);
+	Delete(first->head);
+	Delete(second->head);
 	return 0;
 }
