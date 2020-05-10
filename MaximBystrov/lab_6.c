@@ -10,6 +10,7 @@ typedef struct  tree{
 void AddNode(int data, Tree **node);
 void LeftOrder(Tree *node);
 void JustShow(Tree *node);
+void Delete(Tree *p);
 /*Äîáàâëÿåò ýëåìåíò*/
 void AddNode(int data, Tree **node)
 {
@@ -68,6 +69,15 @@ void JustShow(Tree *node) {
 	JustShow(node->left);
 	JustShow(node->right);
 }
+void Delete(Tree *p)
+{
+  if (p != NULL)
+  {
+    Delete(p->left);
+    delete p;
+    Delete(p->right);
+  }
+}
 int main(){
 	Tree *first=NULL;	
 	AddNode(4, &first);
@@ -85,5 +95,7 @@ int main(){
 	LeftOrder(second);	
 	printf("\n\n");
 	JustShow(second);
+	Delete(first);
+	Delete(second);
 	return 0;
 }
