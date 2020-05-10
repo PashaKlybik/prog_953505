@@ -74,8 +74,8 @@ void Delete(Tree *p)
   if (p != NULL)
   {
     Delete(p->left);
-    delete p;
     Delete(p->right);
+	delete p;
   }
 }
 int main(){
