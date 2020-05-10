@@ -73,9 +73,9 @@ void Delete(Tree *p)
 {
   if (p != NULL)
   {
-   free(p->left);
-   free(p->right);
-	delete p;
+   Delete(p->left);
+   Delete(p->right);
+	 free(p);
   }
 }
 int main(){
