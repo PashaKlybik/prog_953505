@@ -93,9 +93,11 @@ int main(void)
 	InitializeQueue(second_queue);
 	int count1 = 0;
 	int count2 = 0;
-	for (int i = 0; i < 5; i++)
+	int amount = 0;
+	printf("Enter amount of queue elements: ");
+	scanf_s("%d", &amount);
+	for (int i = 0; i < amount; i++)
 	{
-
 		count1 += rand() % 10 + 1;
 		count2 += rand() % 10 + 1;
 		AddToQueue(first_queue, count1);
