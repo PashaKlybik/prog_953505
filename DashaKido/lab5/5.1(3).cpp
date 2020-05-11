@@ -1,5 +1,10 @@
-﻿// 5.1(3).cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+// 5.1(3).cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
+/* 5.1.3
+С помощью двунаправленного списка определить, является ли
+строка палиндромом (т.е. одинаково читается справа налево и слева
+направо). Пробелы и знаки пунктуации – игнорировать.
+*/
 #include <iostream>
 #include <stdio.h>
 #include <string>
@@ -28,7 +33,7 @@ int main()
 	system("chcp 1251");
 	system("cls");
 	printf("Введите строку:\n");
-	char* input = new char[255];
+	char* input = (char*)malloc(255);
 	fgets(input, 255, stdin);
 	EnteredString entStr = initString(input);
 	bool pal = isPalindrom(&entStr);
@@ -40,6 +45,8 @@ int main()
 	{
 		printf("Это не палиндром\n");
 	}
+	//освобождение памяти 
+	free(input);
 	return 0;
 }
 //------------
@@ -71,6 +78,7 @@ void AddChar(EnteredString* entStr, char a)
 		entStr->Tail = p;
 	}
 	entStr->Length++;
+	free(p);
 }
 //------------
 bool isPalindrom(EnteredString* entStr)
@@ -79,8 +87,8 @@ bool isPalindrom(EnteredString* entStr)
 	{
 		return true;
 	}
-	char* First = new char[entStr->Length + 1];
-	char* Second = new char[entStr->Length + 1];
+	char* First = (char*)malloc(entStr->Length + 1);
+	char* Second = (char*)malloc(entStr->Length + 1);
 
 	Item* curr = entStr->Tail;
 	for (int i = 0; i < entStr->Length; i++, curr = curr->Prev)
@@ -95,8 +103,10 @@ bool isPalindrom(EnteredString* entStr)
 		Second[i] = curr->Data;
 	}
 	Second[entStr->Length] = '\0';
-
-	return !strcmp(First, Second);
+	bool result = !strcmp(First, Second);
+	free(First);
+	free(Second);
+	return result;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
