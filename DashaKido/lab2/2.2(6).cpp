@@ -1,4 +1,4 @@
-﻿// 2.2.6.0.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// 2.2.6.0.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include <iostream>
