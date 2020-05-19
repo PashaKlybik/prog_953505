@@ -107,7 +107,6 @@ struct node* treePruning(struct node* cur, struct node* temp)
 
 int main()
 {
-
     struct node* cur;
     struct node* temp;
     cur = new_node(500);
