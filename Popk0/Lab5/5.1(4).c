@@ -28,15 +28,42 @@ MNumber CreateMNumber(char* initStr);
 void AddDigit(MNumber* number, int digit);
 void PrintMNumber(MNumber number);
 MNumber Base10toBase8(MNumber n1);
+void DeleteMNumber(MNumber* number);
 
-void main(void)
+int main()
 {
     printf("Input: ");
     char str[40];
     gets(str);
 	MNumber a = CreateMNumber(str);
+    printf("\n");
 	MNumber c = Base10toBase8(a);
-    PrintMNumber(c);
+	PrintMNumber(c);
+	printf("\n");
+    DeleteMNumber(&a);
+    DeleteMNumber(&c);
+    return 0;
+}
+
+void DeleteMNumber(MNumber* number)
+{
+	Item* temp;
+	while (number->n != 0)
+	{
+		temp = number->tail;
+		number->tail = number->tail->prev;
+		number->n--;
+		if (number->n != 0)
+		{
+			number->tail->next = NULL;
+		}
+		else if (number->n == 0)
+		{
+			number->head = number->tail = NULL;
+			number->n = 0;
+		}
+		free(temp);
+	}
 }
 
 MNumber CreateMNumber(char initStr[])
@@ -104,7 +131,6 @@ MNumber Base10toBase8(MNumber n1)
     {
         arr2[j] = arr1[i-1];
     }
-
     int value = 0;
     for (size_t i = 0; i < ii; ++i)
     {
