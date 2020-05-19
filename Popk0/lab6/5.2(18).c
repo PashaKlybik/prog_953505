@@ -49,6 +49,16 @@ void inOrder(struct node* cur) //печать дерева
     }
 }
 
+void deleteTree(struct node* cur) //удаление дерева
+{
+    if(cur != NULL) //спуск и рек. удаление
+    {
+        deleteTree(cur->left);
+        deleteTree(cur->right);
+        free(cur);
+    }
+}
+
 struct node* treePruning(struct node* cur, struct node* temp)
 {
     if (cur == NULL)
@@ -115,6 +125,8 @@ int main()
 
     inOrder(cur);
     printf("\n");
+    
+    deleteTree(cur);
 
     return 0;
 }
