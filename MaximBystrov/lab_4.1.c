@@ -1,3 +1,4 @@
+// -------------4.1(Вариант 28) Быстров Максим 953505-------------
 #include <stdio.h>
 #include <string.h>
 #include <locale.h>
