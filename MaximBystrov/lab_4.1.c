@@ -21,6 +21,7 @@ int main() {
 	printf("\n\nMax length in text:%d\nMin length in text:%d", MAX, MIN);
 	return 0;
 }
+/*Меняет местами самое длинное и самое короткое слово в text[]*/
 void Swap(char text[]) {
 	char temp[120], temp2[120];
 	int min = 0, max = 0, tempmin = 100, tempmax = 0, index = 0, index2 = 0;
@@ -65,6 +66,7 @@ void Swap(char text[]) {
 	}
 	printf("Swaped:%s", answer);	
 }
+/*Возвращает длину самого длинного слова в text[]*/
 int MaxLength(char text[]) {
 	char temp[120];
 	strcpy_s(temp, sizeof(temp), text);
@@ -80,6 +82,7 @@ int MaxLength(char text[]) {
 	}
 	return tempmax;	
 }
+/*Возвращает длину самого короткого слова в text[]*/
 int MinLength(char text[]) {
 	char temp[120];
 	strcpy_s(temp, sizeof(temp), text);
