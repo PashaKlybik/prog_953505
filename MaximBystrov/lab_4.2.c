@@ -1,3 +1,5 @@
+  
+// -------------4.2(Вариант 28) Быстров Максим 953505-------------
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <errno.h>
@@ -5,11 +7,12 @@
 void Replacement();
 void Replace(char oldword[], char newword[], char answer[]);
 int NumOfPairs();
-void replaceAll(char *str, const char *oldword, const char *newword);
+void ReplaceInLine(char *str, const char *oldword, const char *newword);
 int main() {
 	Replacement();
 	return 0;	
 }
+/*Находим количество пар во втором файле*/
 int NumOfPairs() {
 	FILE* fPtr;
 	errno_t err;
@@ -29,6 +32,7 @@ int NumOfPairs() {
 	}
 	return NUM;
 }
+/*Проходим по каждой паре во втором файле и вызываем фукцию замены*/
 void Replacement() {
 	FILE* fPtr;
 	errno_t err;
@@ -47,6 +51,7 @@ void Replacement() {
 		fclose(fPtr);
 	}
 }
+/*Проходим по каждой строке первого файла и переписываем сам файл*/
 void Replace(char oldword[],char newword[],char answer[]) {
 	FILE* fPtr;
 	FILE* fTemp;
@@ -60,7 +65,7 @@ void Replace(char oldword[],char newword[],char answer[]) {
 	else {		
 		while ((fgets(currentline, 120, fPtr)) != NULL)
 		{
-			replaceAll(currentline, oldword, newword);
+			ReplaceInLine(currentline, oldword, newword);
 			fputs(currentline, fTemp);
 		}
 		fclose(fPtr);
@@ -69,7 +74,7 @@ void Replace(char oldword[],char newword[],char answer[]) {
 		rename("replace.tmp", "first.txt");
 	}
 }
-void replaceAll(char *str, const char *oldword, const char *newword)
+void ReplaceInLine(char *str, const char *oldword, const char *newword)
 {
 	char *pos, temp[120];
 	int index = 0;
