@@ -527,7 +527,7 @@ int WriteCommentsToFile(List* listComm)
 
 
 
-void PageLogic(int key, int tableIter, List* listComm)  //действия со статьей
+void PageLogic(int key, int tableIter, List* listComm)  //РґРµР№СЃС‚РІРёСЏ СЃРѕ СЃС‚Р°С‚СЊРµР№
 {
 	int numComment, n;
 	Comment comm;
@@ -559,7 +559,7 @@ void PageLogic(int key, int tableIter, List* listComm)  //действия со статьей
 			if (AddCommentToFile(comm)) exit(1);
 			PushBack(hashTable.table[tableIter]->Comments, comm);
 		}
-		else //действие с выбранным комментом
+		else //РґРµР№СЃС‚РІРёРµ СЃ РІС‹Р±СЂР°РЅРЅС‹Рј РєРѕРјРјРµРЅС‚РѕРј
 		{
 			selectComm = Get(hashTable.table[tableIter]->Comments, numComment);
 
@@ -588,7 +588,7 @@ void PageLogic(int key, int tableIter, List* listComm)  //действия со статьей
 	}
 }
 
-void SearchPage(Page* page, List* listComm) //поиск нужной статьи
+void SearchPage(Page* page, List* listComm) //РїРѕРёСЃРє РЅСѓР¶РЅРѕР№ СЃС‚Р°С‚СЊРё
 {
 	int* ID = (int*)malloc(sizeof(int) * countPage);
 	int numID;
@@ -604,7 +604,7 @@ void SearchPage(Page* page, List* listComm) //поиск нужной статьи
 		ifContinue = 0;
 		switch (key)
 		{
-		case 0: //поиск по названию
+		case 0: //РїРѕРёСЃРє РїРѕ РЅР°Р·РІР°РЅРёСЋ
 			flag = 1;
 			printf(":");
 			gets(name);
@@ -624,12 +624,12 @@ void SearchPage(Page* page, List* listComm) //поиск нужной статьи
 				ifContinue = 1;
 				break;
 			}
-			else//если нашло
+			else//РµСЃР»Рё РЅР°С€Р»Рѕ
 			{
 				numID = IDMenu(ID, count);
 			}
-		case 1: //логика ствтьи (страница сайта)
-			if (flag)//если продолжение case 0
+		case 1: //Р»РѕРіРёРєР° СЃС‚РІС‚СЊРё (СЃС‚СЂР°РЅРёС†Р° СЃР°Р№С‚Р°)
+			if (flag)//РµСЃР»Рё РїСЂРѕРґРѕР»Р¶РµРЅРёРµ case 0
 			{
 				id = ID[numID];
 			}
