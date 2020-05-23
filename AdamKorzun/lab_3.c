@@ -167,6 +167,9 @@ void assignment1() {
 		printf("Matrix rank: %d", linIndependtentC);
 	}
 	
+	for (int i = 0; i < rows; i++) {
+		free(matrix[i]);
+	}
 	free(matrix);
 
 }
