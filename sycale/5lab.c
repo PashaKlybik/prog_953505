@@ -46,6 +46,20 @@ void print_list(struct Node* head)
 	} 
 } 
 
+
+void freeList(struct Node* head)
+{
+   struct Node* tmp;
+
+   while (head != NULL)
+    {
+       tmp = head;
+       head = head->next;
+       free(tmp);
+    }
+
+}
+
 int main() 
 { 
 	struct Node* head = NULL; 
@@ -61,4 +75,6 @@ int main()
 	reverse(&head); 
 	printf("\nReversed Linked list \n"); 
 	print_list(head);
+
+	free_list(head);
 } 
