@@ -317,6 +317,12 @@ int main()
 					trucks[i].path = 1;
 					trucks[i].active = true;
 					trucks[i].toNextPoint = Minsk.toBorder;
+
+					for (int j = 0; j < 6; j++)
+					{
+						visited[i][j] = false;
+					}
+
 					break;
 				}
 			}
@@ -331,6 +337,12 @@ int main()
 					trucks[i].path = 2;
 					trucks[i].active = true;
 					trucks[i].toNextPoint = Minsk.toBorderBack;
+
+					for (int j = 0; j < 6; j++)
+					{
+						visited[i][j] = false;
+					}
+
 					break;
 				}
 			}
@@ -346,6 +358,12 @@ int main()
 					trucks[i].active = true;
 					trucks[i].toNextPoint = 0;
 					trucks[i].point = 6;
+
+					for (int j = 0; j < 6; j++)
+					{
+						visited[i][j] = false;
+					}
+
 					break;
 				}
 			}
@@ -361,6 +379,12 @@ int main()
 					trucks[i].active = true;
 					trucks[i].toNextPoint = 0;
 					trucks[i].point = 5;
+
+					for (int j = 0; j < 6; j++)
+					{
+						visited[i][j] = false;
+					}
+
 					break;
 				}
 			}
@@ -390,7 +414,7 @@ int main()
 				puts("\n");
 			}
 
-			PrintTrucks(trucks, capitals);
+			PrintTrucks(trucks, capitals, visited);
 			puts("\n\n");
 			PrintFruitPrices(capitals);
 		}
@@ -463,6 +487,7 @@ int main()
 								}
 
 								trucks[i].done = true;
+								visited[i][trucks[i].point] = true;
 								trucks[i].toNextPoint = capitals[trucks[i].point + ((trucks[i].path == 1) ? (0) : (6))]->toBorderBack;
 							}
 							else //have arrived to border
@@ -657,17 +682,21 @@ void MissionCompleted(truck* tr, capital* Minsk)
 	tr->point = 0;
 	tr->done = false;
 	tr->spentOnFruits = 0;
-	
 }
 
-void PrintTrucks(truck* trucks, capital* capitals[])
+void PrintTrucks(truck* trucks, capital* capitals[], bool visited[6][6])
 {
-	puts("# N | path | state | next p. | oil | place | money spent | way | point | where #\n");
+	puts("# N | path | state | next p. | oil | place | money spent | way | point | where | visited #\n");
 	for (char i = 0; i < 6; i++)
 	{
 		if (trucks[i].active)
 		{
-			printf("# %d | %d | %s | %.2f | %.2f | %.2f | $%.2f | %s | %d | %s #\n", i + 1, trucks[i].path, ((trucks[i].onBorder) ? ("on border") : ("driving")), trucks[i].toNextPoint, trucks[i].haveOil, trucks[i].avaiblePlace, trucks[i].spent, (trucks[i].done)?("to Minsk"):("from Minsk"), trucks[i].point, capitals[(trucks[i].point == 0)?(0):(trucks[i].point + ((trucks[i].path == 1)?(0):(6)))]->name);
+			printf("# %d | %d | %s | %.2f | %.2f | %.2f | $%.2f | %s | %d | %s | %s #\n",
+				i + 1, trucks[i].path, ((trucks[i].onBorder) ? ("on border") : ("driving")),
+				trucks[i].toNextPoint, trucks[i].haveOil, trucks[i].avaiblePlace,
+				trucks[i].spent, (trucks[i].done)?("to Minsk"):("from Minsk"), trucks[i].point,
+				(capitals[(trucks[i].point == 0)?(0):(trucks[i].point + ((trucks[i].path == 1)?(0):(6)))]->name),
+				((visited[i][trucks[i].point])?("yep"):("nope")));
 		}
 	}
 }
