@@ -1,4 +1,3 @@
-// var 10
 #include <stdio.h>
 typedef struct node {
 	char data[100];
@@ -25,27 +24,63 @@ void AddNode(Node **node, char data[100]) {
 	}
 	
 }
-void findPalindrome(char data[100]) {
+char* findPalindrome(char data[100]) {
 	int wordLen = strlen(data);
 	for (int i = 0; i < wordLen / 2; i++) {
 		if (data[i] != data[wordLen - i  - 1]) {
-			return;
+			return '0';
 		}
 	}
-	printf("%s\n", data);
+	return data;
+	//printf("%s\n", data);
 }
-void LeftOrder(Node* node)
+void LeftOrderNumber(Node* node,int *number)
 {
 	
 	if (node->left) {
-		LeftOrder(node->left);
+		LeftOrderNumber(node->left,number);
 	}
 	if (node->right) {
-		LeftOrder(node->right);
+		LeftOrderNumber(node->right, number);
 	}
-	findPalindrome(node->data);
-	//printf("%s\n", node->data);
+	if (findPalindrome(node->data) != '0') {
+		*number = *number+1;
+	}
+	
 
+}
+void LeftOrderFill(Node* node, int* number, char** pArray)
+{
+
+	if (node->left) {
+		LeftOrderFill(node->left, number,pArray);
+	}
+	if (node->right) {
+		LeftOrderFill(node->right, number,pArray);
+	}
+	if (findPalindrome(node->data) != '0') {
+		strcpy(pArray[*number], node->data);
+		*number = *number + 1;
+	}
+
+
+}
+void SortArray(char** palindromeArray, int number) {
+	char* temp = (char*)malloc(sizeof(char) * 100);
+	for (int i = 0; i < number - 1; i++) {
+		for (int j = i + 1; j < number; j++) {
+			if (strcmp(palindromeArray[j], palindromeArray[i]) < 0)
+			{
+				strcpy(temp, palindromeArray[j]);
+				strcpy(palindromeArray[j], palindromeArray[i]);
+				strcpy(palindromeArray[i], temp);
+			}
+		}
+
+	}
+	for (int i = 0; i < number; i++) {
+		printf("%s\n", palindromeArray[i]);
+	}
 }
 int main() {
 	Node* root = NULL;
@@ -61,6 +96,18 @@ int main() {
 		printf("Word: ");
 		gets(word);
 	}
-	LeftOrder(root);
+	int number = 0;
+	LeftOrderNumber(root,&number);
+	char** palindromeArray = (char**)malloc(sizeof(char*) * number);
+	for (int i = 0; i < number; i++) {
+		palindromeArray[i] = (char*)malloc(sizeof(char) * 100);
+	}
+	number = 0;
+	LeftOrderFill(root, &number, palindromeArray);
+	SortArray(palindromeArray, number);
+
+
+
+	
 	return -1;
 }
