@@ -32,7 +32,7 @@ char* findPalindrome(char data[100]) {
 		}
 	}
 	return data;
-	//printf("%s\n", data);
+	
 }
 void LeftOrderNumber(Node* node,int *number)
 {
@@ -82,6 +82,15 @@ void SortArray(char** palindromeArray, int number) {
 		printf("%s\n", palindromeArray[i]);
 	}
 }
+void DeleteTree(Node* node) {
+	if (node->left) {
+		DeleteTree(node->left);
+	}
+	if (node->right) {
+		DeleteTree(node->right);
+	}
+	free(node);
+}
 int main() {
 	Node* root = NULL;
 	char word[100];
@@ -106,8 +115,11 @@ int main() {
 	LeftOrderFill(root, &number, palindromeArray);
 	SortArray(palindromeArray, number);
 
-
-
+	for (int i = 0; i < number;i++) {
+		free(palindromeArray[i]);
+	}
+	free(palindromeArray);
+	DeleteTree(root);
 	
 	return -1;
 }
