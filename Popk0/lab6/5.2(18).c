@@ -11,15 +11,14 @@
 #include <stdlib.h>
 #include <malloc.h>
 
-struct node
+struct node //структура для описания узла дерева
 {
     int data;
     struct node* right;
     struct node* left;
 };
 
-//function to create a node
-struct node* new_node(int x) //созд. узла
+struct node* newNode(int x) //созд. корня дерева
 {
     struct node* p;
     p = malloc(sizeof(struct node));
@@ -30,9 +29,9 @@ struct node* new_node(int x) //созд. узла
     return p;
 }
 
-struct node* insert(struct node* cur, int x) //вставка нового эл-та
+struct node* insert(struct node* cur, int x) //вставка нового узла дерева
 {
-    if (cur == NULL) return new_node(x);
+    if (cur == NULL) return newNode(x);
     else if (x > cur->data)
         cur->right = insert(cur->right, x);
     else cur->left = insert(cur->left, x);
@@ -49,7 +48,7 @@ void inOrder(struct node* cur) //печать дерева
     }
 }
 
-void deleteTree(struct node* cur) //удаление дерева
+void deleteTree(struct node* cur) //удаление дерева //очистка памяти
 {
     if(cur != NULL) //спуск и рек. удаление
     {
@@ -59,7 +58,7 @@ void deleteTree(struct node* cur) //удаление дерева
     }
 }
 
-struct node* treePruning(struct node* cur, struct node* temp)
+struct node* treePruning(struct node* cur, struct node* temp) //обрезка самого дерева
 {
     if (cur == NULL)
         return NULL;
@@ -86,7 +85,7 @@ struct node* treePruning(struct node* cur, struct node* temp)
             treePruning(cur->left, temp);
         }
         //если правый и левый - листы, удаляем правый потомок (можно и левый, не принципиально)
-        else if ((cur->right)->left == NULL && (cur->right)->right == NULL && (cur->left)->left == NULL && (cur->left)->right == NULL)      
+        else if ((cur->right)->left == NULL && (cur->right)->right == NULL && (cur->left)->left == NULL && (cur->left)->right == NULL)
         {
             free(cur->right);
             cur->right = NULL;
@@ -98,7 +97,7 @@ struct node* treePruning(struct node* cur, struct node* temp)
     {
         treePruning(cur->left, temp);
     }
-    //если правый потомок есть, а левого нету - идем к правому 
+    //если правый потомок есть, а левого нету - идем к правому
     else if (cur->left == NULL && cur->right != NULL)
         treePruning(cur->right, temp);
 
@@ -109,7 +108,7 @@ int main()
 {
     struct node* cur;
     struct node* temp;
-    cur = new_node(500);
+    cur = newNode(500);
     insert(cur, 480); insert(cur, 490);
     insert(cur, 475); insert(cur, 478);
     insert(cur, 470); insert(cur, 495);
@@ -117,14 +116,15 @@ int main()
     insert(cur, 510); insert(cur, 520);
     insert(cur, 505); insert(cur, 501);
     insert(cur, 507); insert(cur, 527);
-   
-    inOrder(cur);
-    printf("\n");
-    treePruning(cur, temp);
 
     inOrder(cur);
     printf("\n");
     
+    treePruning(cur, temp);
+
+    inOrder(cur);
+    printf("\n");
+
     deleteTree(cur);
 
     return 0;
