@@ -35,10 +35,14 @@ typedef struct truck
 /*
 point:
 0 - Minsk
+path 1:
 1 - Warsaw
 2 - Prague
 etc...
-6 - Kiyv
+
+path 2:
+1 - Kiyv
+2 - Kishinev
 etc...
 */
 
@@ -50,7 +54,6 @@ void PrintFruitPrices(capital* []);
 void oilRefill(truck*, capital*);
 
 /*
-
 6.2 (29). FruitImport. Белорусская компания импортирует фрукты из ряда
 европейских стран. Компания арендует торговые площадки,
 находящиеся на двух главных маршрутах: 1) в Варшаве, Праге,
@@ -68,7 +71,6 @@ void oilRefill(truck*, capital*);
 оптимального движения грузовиков FruitImport.
 Проиллюстрировать движение автомобилей и совершаемые
 деловые операции в режиме реального времени.
-
 */
 
 int main()
