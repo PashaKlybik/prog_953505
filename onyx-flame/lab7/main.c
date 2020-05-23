@@ -45,7 +45,7 @@ int main()
                 temp = temp->next;
             }
             int num = -1;
-            printf("Введите номер желаемой статьи: ");
+            printf("Введите номер желаемой статьи: "); 
             while(num<1 || num>(collectionOfItems->size))
             {
                 t = (char*)malloc(10);
