@@ -15,19 +15,19 @@ char* TimeToChar(time_t time)
 void Print(Worker worker)
 {
 	SetLightBlueColor();
-	printf("Имя: %s\n", worker.name);
-	printf("Фамилия: %s\n", worker.surname);
-	printf("Отчество: %s\n", worker.patronymic);
+	printf("РРјСЏ: %s\n", worker.name);
+	printf("Р¤Р°РјРёР»РёСЏ: %s\n", worker.surname);
+	printf("РћС‚С‡РµСЃС‚РІРѕ: %s\n", worker.patronymic);
 	char* timestr = TimeToChar(worker.date_of_birth);
-	printf("Дата рождения: %s\n", timestr);
-	printf("Номер паспорта: %d\n", worker.passport_ID);
-	printf("Номер карточки социального страхования: %d\n", worker.insurance_ID);
-	printf("Образование: %s\n", worker.education);
-	printf("Должность: %s\n", worker.position);
-	printf("Зарплата: %d\n", worker.salary);
+	printf("Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ: %s\n", timestr);
+	printf("РќРѕРјРµСЂ РїР°СЃРїРѕСЂС‚Р°: %d\n", worker.passport_ID);
+	printf("РќРѕРјРµСЂ РєР°СЂС‚РѕС‡РєРё СЃРѕС†РёР°Р»СЊРЅРѕРіРѕ СЃС‚СЂР°С…РѕРІР°РЅРёСЏ: %d\n", worker.insurance_ID);
+	printf("РћР±СЂР°Р·РѕРІР°РЅРёРµ: %s\n", worker.education);
+	printf("Р”РѕР»Р¶РЅРѕСЃС‚СЊ: %s\n", worker.position);
+	printf("Р—Р°СЂРїР»Р°С‚Р°: %d\n", worker.salary);
 	timestr = TimeToChar(worker.work_start_date);
-	printf("Дата начала работы: %s\n", timestr);
-	printf("Примечания: %s\n", worker.annotation);
+	printf("Р”Р°С‚Р° РЅР°С‡Р°Р»Р° СЂР°Р±РѕС‚С‹: %s\n", timestr);
+	printf("РџСЂРёРјРµС‡Р°РЅРёСЏ: %s\n", worker.annotation);
 	char buff1[100] = "";
 	char buff2[100] = "";
 	struct tm* start_date = localtime(&worker.work_start_date);
@@ -35,15 +35,15 @@ void Print(Worker worker)
 	time_t t = time(0);
 	struct tm* date = localtime(&t);
 	strftime(buff1, 100, "%d.%m.%G", date);
-	printf("Рабочий работает с %s по %s\n", buff2, buff1);
+	printf("Р Р°Р±РѕС‡РёР№ СЂР°Р±РѕС‚Р°РµС‚ СЃ %s РїРѕ %s\n", buff2, buff1);
 	if (worker.on_vacation)
 	{
-		printf("Сейчас рабочий в отпуске\n");
+		printf("РЎРµР№С‡Р°СЃ СЂР°Р±РѕС‡РёР№ РІ РѕС‚РїСѓСЃРєРµ\n");
 	}
 	else
 	{
-		printf("Сейчас рабочий не в отпуске\n");
-		printf("До отпуска %d месяцев, %d дней\n", worker.months_until_vacation, worker.days_until_vacation);
+		printf("РЎРµР№С‡Р°СЃ СЂР°Р±РѕС‡РёР№ РЅРµ РІ РѕС‚РїСѓСЃРєРµ\n");
+		printf("Р”Рѕ РѕС‚РїСѓСЃРєР° %d РјРµСЃСЏС†РµРІ, %d РґРЅРµР№\n", worker.months_until_vacation, worker.days_until_vacation);
 	}
 	SetWhiteColor();
 }
