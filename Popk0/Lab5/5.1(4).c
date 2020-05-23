@@ -95,7 +95,7 @@ MNumber CreateMNumber(char* str) //создание многоразрядног
 		}
 	}
 	return number;
-}
+} 
 
 void AddDigit(MNumber* number, int digit) //добавление числа в многоразрядное число
 {
