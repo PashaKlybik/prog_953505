@@ -24,7 +24,7 @@ int main()
     ReadArticles(collectionOfItems);
     ReadSourceCodes(collectionOfItems);
     ReadComments(collectionOfItems);
-    char choice;
+    char choice; 
     char* t;
     while(true)
     {
