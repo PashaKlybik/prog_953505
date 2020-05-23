@@ -114,7 +114,7 @@ void print(struct info inf)
    printf("Number - %i, Type - %s, Route - %s, Stops - %i, Time - %i, Days - %i, Places - %i\n", inf.number, inf.type, inf.route, inf.stops, inf.time, inf.days, inf.places);
 }
 
-int ReadFromFile(struct Node** head, FILE* file)
+void read_file(struct Node** head, FILE* file)
 {
 
 	while(!feof(file))
@@ -153,7 +153,6 @@ int ReadFromFile(struct Node** head, FILE* file)
       }
    
    }
-   return 1;
 }
 
 void freeList(struct Node* head)
@@ -167,6 +166,32 @@ void freeList(struct Node* head)
        free(tmp);
     }
 
+}
+
+void write_file(struct Node* head, FILE* file)
+{
+   struct Node* current = head;
+
+   while(current)
+   {
+      fprintf(file, "%i", current->data.number);
+   
+      fprintf(file, "%s", current->data.type);
+   
+      fprintf(file, "%s", current->data.route);
+   
+      fprintf(file, "%d", current->data.stops);
+   
+      fprintf(file, "%d", current->data.time);
+   
+      fprintf(file, "%d", current->data.days);
+   
+      fprintf(file, "%d", current->data.places);
+   
+      fprintf(file, "%d", current->data.is_ordered);
+
+      current = current->next;
+   }
 }
 
 int get_places(struct Node* head, char* route)

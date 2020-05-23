@@ -10,7 +10,7 @@ int main()
 
 	char buff[100];
 
-	ReadFromFile(&head, file);
+	read_file(&head, file);
 
 	char sign;
 
@@ -41,6 +41,7 @@ int main()
 				print_ticket(temp_info);
 				break;
 			case 'q':
+				write_file(head, file);
 				return 0;
 			default:
 				printf("Type appropriate sign");
