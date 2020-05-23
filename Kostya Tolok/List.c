@@ -107,7 +107,7 @@ void ListPrint(List* list)
 	while (print)
 	{
 		SetLightBlueColor();
-		printf("\n%d-é ðàáî÷èé: \n", i++);
+		printf("\n%d-Ð¹ Ñ€Ð°Ð±Ð¾Ñ‡Ð¸Ð¹: \n", i++);
 		Print(print->data);
 		print = print->next;
 	}
