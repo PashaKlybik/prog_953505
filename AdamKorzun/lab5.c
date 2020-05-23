@@ -102,5 +102,10 @@ int main()
         }
         serv = serv->next;
     }
+    while (serv->prev) {
+        serv = serv->prev;
+        free(serv->next);
+    }
+    free(serv);
     return 0;
 }
