@@ -9,8 +9,6 @@ typedef char bool;
 #define true 1;
 #define false 0;
 
-double SALARY = 67.65; //in $,in month
-
 typedef struct capital
 {
 	char* name;
@@ -430,13 +428,13 @@ int main()
 								
 								if (!timeBoost)
 								{
-									Sleep(2000);
+									Sleep(5000);
 								}
 
 								continue;
 							}
 
-							if (visited[i][trucks[i].point + ((trucks[i].path == 1) ? (0) : (5))]) //have arrived to border
+							if (visited[i][trucks[i].point + ((trucks[i].path == 1) ? (0) : (6))]) //have arrived to border
 							{
 								trucks[i].onBorder = true;
 								whenOnBorder[i] = sec; //time when start crossing the border
@@ -498,7 +496,14 @@ int main()
 
 						if ((trucks[i].haveOil -= trucks[i].oilConsumption * 3600) < 100) //instant oil refilling, yep
 						{
-							oilRefill(&trucks[i], (capitals[trucks[i].point + ((trucks[i].path == 1) ? (0) : (6))]));
+							if (!trucks[i].point)
+							{
+								oilRefill(&trucks[i], capitals[0]);
+							}
+							else
+							{
+								oilRefill(&trucks[i], (capitals[trucks[i].point + ((trucks[i].path == 1) ? (0) : (6))]));
+							}
 						}
 					}
 					else
@@ -507,7 +512,18 @@ int main()
 
 						if (trucks[i].done) //path to Minsk
 						{
-							if (visited[i][trucks[i].point + ((trucks[i].path == 1) ? (0) : (5))]) //have arrived to border
+							if (!trucks[i].point)
+							{
+								MissionCompleted(&trucks[i], &Minsk);
+
+								if (!timeBoost)
+								{
+									Sleep(2000);
+								}
+
+								continue;
+							}
+							else if (visited[i][trucks[i].point]) //have arrived to border
 							{
 								trucks[i].onBorder = true;
 								whenOnBorder[i] = sec + secToPoint; //time when start crossing the border
@@ -523,6 +539,7 @@ int main()
 									Sleep(2000);
 								}
 
+								visited[i][trucks[i].point] = true;
 								trucks[i].toNextPoint = (capitals[trucks[i].point + ((trucks[i].path == 1) ? (0) : (6))]->toBorderBack - (sec + 3600 - secToPoint)*(trucks[i].speed / 3600));
 							}
 						}
@@ -534,9 +551,10 @@ int main()
 
 								if (!timeBoost)
 								{
-									Sleep(2000);
+									Sleep(5000);
 								}
 
+								visited[i][trucks[i].point] = true;
 								trucks[i].done = true;
 								trucks[i].toNextPoint = (capitals[trucks[i].point + ((trucks[i].path == 1) ? (0) : (6))]->toBorderBack - (sec + 3600 - secToPoint) * (trucks[i].speed / 3600));
 							}
@@ -555,8 +573,7 @@ int main()
 						{
 							oilRefill(&trucks[i], (capitals[trucks[i].point + ((trucks[i].path == 1) ? (0) : (6))]));
 						}
-
-						
+												
 					}
 				}
 				else if (trucks[i].onBorder)
@@ -586,7 +603,7 @@ int main()
 
 void ChangePrices(capital* capitals[])
 {
-	capitals[0]->fruitPrice = 1.65 * (120. - (double)(rand() % 41)) / (double)100;
+	capitals[0]->fruitPrice = 1.75 * (120. - (double)(rand() % 41)) / (double)100;
 	for (char i = 1; i < 12; i++)
 	{
 		capitals[i]->fruitPrice = 1.5 * (120. - (double)(rand() % 41)) / (double)100;
@@ -628,8 +645,9 @@ void Trading(truck* truck, capital* cap)
 
 void MissionCompleted(truck* tr, capital* Minsk)
 {
-	printf("Truck from path %d has arrived.\n Revenue is $%f-$%f", tr->path, Minsk->fruitPrice*((25.0 - tr->avaiblePlace) * 1000)*0.1, Minsk->fruitPrice * ((25.0 - tr->avaiblePlace) * 1000) * 0.15); //%10-15
-
+	double cash = Minsk->fruitPrice * ((25.0 - tr->avaiblePlace) * 1000);
+	printf("Truck from path %d has arrived.\n Revenue is $%f - $%f", tr->path, cash * 0.1, cash * 0.15); //%10-15
+	
 	tr->avaiblePlace = 25;
 	tr->haveOil = 500;
 	tr->oilConsumption = 0.003;
@@ -651,7 +669,7 @@ void PrintTrucks(truck* trucks, capital* capitals[])
 	{
 		if (trucks[i].active)
 		{
-			printf("# %d | %d | %s | %.2f | %.2f | %.2f | $%.2f | %s | %d | %s #\n", i + 1, trucks[i].path, ((trucks[i].onBorder) ? ("on border") : ("driving")), trucks[i].toNextPoint, trucks[i].haveOil, trucks[i].avaiblePlace, trucks[i].spent, (trucks[i].done)?("to Minsk"):("from Minsk"), trucks[i].point, capitals[trucks[i].point + ((trucks[i].path == 1)?(0):(+6))]->name);
+			printf("# %d | %d | %s | %.2f | %.2f | %.2f | $%.2f | %s | %d | %s #\n", i + 1, trucks[i].path, ((trucks[i].onBorder) ? ("on border") : ("driving")), trucks[i].toNextPoint, trucks[i].haveOil, trucks[i].avaiblePlace, trucks[i].spent, (trucks[i].done)?("to Minsk"):("from Minsk"), trucks[i].point, capitals[(trucks[i].point == 0)?(0):(trucks[i].point + ((trucks[i].path == 1)?(0):(6)))]->name);
 		}
 	}
 }
@@ -661,6 +679,3 @@ void oilRefill(truck* truck, capital* cap)
 	(*truck).haveOil += 400;
 	(*truck).spent += cap->oilPrice * 400;
 }
-
-
-//only for 666
