@@ -1,0 +1,56 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <locale.h>
+#include <math.h>
+
+//1 8 27 64 125 216 343 512 729 1000 1331
+
+void Definition()
+{
+	int a = 0, i = 1, b;
+
+	printf("\nВведите номер числа последовательности: ");
+
+	while (!scanf_s("%d", &a) || a <= 0)
+	{
+		printf("Неверный ввод.");
+		while (getchar() != '\n');
+		printf("\nПовторите попытку: ");
+	}
+	while (getchar() != '\n');
+
+	for (b = 0; b < a; i++)
+	{
+		int x = pow(i,3);
+		int c = 0;
+		while (x > 0)
+		{
+			c++;
+			x /= 10;
+		}
+		b += c;
+	}
+	i--;
+	i = pow(i,3);
+	for (int j = 1; j <= b - a; j++, i /= 10);
+	printf("Полученное число: %d", i % 10);
+}
+
+int main(int argc, char* argv[])
+{
+	setlocale(LC_ALL, "rus");
+	char start;
+
+	while (1)
+	{
+		Definition();
+		printf("\nНажмите любую клваишу для продолжения или 'Y' для выхода: ");
+		start = getchar();
+		if (start == 'y' || start == 'Y')
+		{
+			exit(EXIT_SUCCESS);
+		}
+	}
+}
