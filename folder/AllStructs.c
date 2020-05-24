@@ -37,8 +37,6 @@ void AddFlight(List* list, Flight* flight)
 	Item* p = (Item*)malloc(sizeof(Item));
 		p->item = (Flight*)malloc(sizeof(Flight));
 		memcpy(p->item, flight, sizeof(Flight));
-	//memcpy(,,);
-	//p->item = flight;
 	p->next = p->prev = NULL;
 	if (list->head == NULL)list->head = list->tail = p;
 	else {
@@ -86,8 +84,13 @@ void DeleteFromList(List* list, int index)
 	Item* p = list->head;
 	while (p) {
 		if (p->item->numinlist == index) {
-			p->prev->next = p->next;
-			p->next->prev = p->prev;
+			if (p->next != NULL) {
+				p->prev->next = p->next;
+				p->next->prev = p->prev;
+			}
+			else {
+				p->prev->next = NULL;
+			}
 			free(p->item);
 			free(p);
 			return;
@@ -109,7 +112,7 @@ void PrintAllFlights(List* list)
 void AddFlightInList(List* list) {
 	system("cls");
 	Flight* flight = (Flight*)malloc(sizeof(Flight));
-	flight->numinlist = (list->n);
+	flight->numinlist = FItemsGetCount();
 	flight->isdeleted = 0;
 	printf("Enter destination:");
 	scanf("%s", flight->destination);
@@ -163,8 +166,6 @@ void AppropriateRace(List* list)
 	system("cls");
 	printf("Please, enter destination:");
 	scanf_s("%s", destination,sizeof(destination));
-	//Item* p = (Item*)malloc(sizeof(Item));
-	//p=(list)->head;
 	Item* p = list->head;
 	while (p)
 	{
@@ -189,6 +190,5 @@ void AppropriateRace(List* list)
 	if (!count) {
 		printf("\nNo results were found for this request.\n");
 	}else PrintFlightByIndex(list, index);
-	//free(p);
 	getchar();
 }
