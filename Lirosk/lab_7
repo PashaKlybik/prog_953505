@@ -550,30 +550,6 @@ int main()
 	return 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void writeTTF(FILE* file, trucksl* trucks)
 {
 	trucksl* i = trucks;
@@ -601,6 +577,7 @@ void writeTTF(FILE* file, trucksl* trucks)
 		}
 	}
 }
+
 void writeCTF(FILE* file, capitalsl* capitals)
 {
 	capitalsl* i = capitals;
@@ -807,6 +784,7 @@ void readTFF(FILE* file, trucksl** trucks)
 	free(i->n);
 	i->n = NULL;
 }
+
 void readCFF(FILE* file, capitalsl** capitals)
 {
 	char buf[fr-1];
@@ -872,6 +850,7 @@ truck* getT(trucksl* trucks, unsigned int index)
 
 	return NULL;
 }
+
 capital* getC(capitalsl* capitals, unsigned int index)
 {
 	capitalsl* i;
@@ -916,6 +895,7 @@ void freeTL(trucksl** trucks)
 
 	*trucks = NULL;
 }
+
 void freeCL(capitalsl** capitals)
 {
 	if (!(*capitals)) //size == 0
