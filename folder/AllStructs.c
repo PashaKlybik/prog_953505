@@ -50,18 +50,47 @@ void AddFlight(List* list, Flight* flight)
 }
 void PrintFlight(Flight flight)
 {
-	printf("\nFlight number:%s\tType:%s\tDestination:%s\tDate: %s,%d\tDeparture Time:%d:%d\t Flight Time:%d  Free Places:%d",
-		flight.flight_number,flight.type,flight.destination,GetMonth(flight.month),flight.day,
+	printf("\n%d Flight number:%s\tType:%s\tDestination:%s\tDate: %s,%d\tDeparture Time:%d:%d\t Flight Time:%d  Free Places:%d",
+		flight.numinlist, flight.flight_number,flight.type,flight.destination,GetMonth(flight.month),flight.day,
 		flight.hour,flight.minute,flight.flight_time,flight.free_places);
 }
 void PrintFlightByIndex(List* list,int index) {
 	if (index < 0)return;
-	Item* p = (Item*)malloc(sizeof(Item));
-	p->item = (Flight*)malloc(sizeof(Flight));
-	p = list->head;
-	while (p->item->numinlist!=index) {
+	Item* p = list->head;
+	int listindex = 0;
+	while (p) {
+		if (listindex == index) {
+			PrintFlight(*(p->item));
+			return;
+		}
+		listindex++;
+		p = p->next;
+	}
+}
+void DeleteMenu(List* list)
+{
+	int index;
+	system("cls");
+	PrintAllFlights(list);
+	printf("---------------\nWhich one you want to delete?");
+	scanf("%d", &index);
+	if (index > 0)
+	{
+		DeleteFromFile(index);
+		DeleteFromList(list, index);
+		
+	}
+}
+void DeleteFromList(List* list, int index)
+{
+	Item* p = list->head;
+	while (p) {
 		if (p->item->numinlist == index) {
-			PrintFlight(*p->item);
+			p->prev->next = p->next;
+			p->next->prev = p->prev;
+			free(p->item);
+			free(p);
+			return;
 		}
 		p = p->next;
 	}
@@ -72,7 +101,6 @@ void PrintAllFlights(List* list)
 	Item* p = list->head;
 	while (p) 
 	{
-		//место для функции показа билетика XDDD ПАМАГИТЕ МНЕ СТРАШНО ИДТИ НА СЕССИю
 		PrintFlight(*p->item);
 		p = p->next;
 	}	
@@ -81,7 +109,8 @@ void PrintAllFlights(List* list)
 void AddFlightInList(List* list) {
 	system("cls");
 	Flight* flight = (Flight*)malloc(sizeof(Flight));
-	flight->numinlist = list->n;
+	flight->numinlist = (list->n);
+	flight->isdeleted = 0;
 	printf("Enter destination:");
 	scanf("%s", flight->destination);
 	printf("Enter flight number:");
@@ -110,7 +139,7 @@ void Search(List* list)
 	do
 	{
 		key = getchar();
-		system("cls");
+			system("cls");
 		printf("\t\t\t\t\tBelavia\n\n");
 		printf(
 			"1.Find appropriate race\n"
@@ -128,7 +157,7 @@ void AppropriateRace(List* list)
 {
 	int count = 0;
 	char destination[15];
-	int index = 0;
+	int index = 0,listindex=0;
 	Month tempMonth=December;
 	int tempDay = 31;
 	system("cls");
@@ -140,26 +169,26 @@ void AppropriateRace(List* list)
 	while (p)
 	{
 		if (strcmp(p->item->destination,destination)==0) {
-			 if ((int)p->item->month == (int)tempMonth) {
+			 if (p->item->month == tempMonth) {
 				if (p->item->day<tempDay) {
 					tempDay = p->item->day;
 					tempMonth = p->item->month;
-					index = p->item->numinlist;
+					index = listindex;
 					count++;
 				}
-			}else if ((int)p->item->month<(int)tempMonth && (int)p->item->month>(int)CurrentMonth) {
+			}else if (p->item->month<tempMonth && p->item->month>CurrentMonth) {
 				tempDay = p->item->day;
 				tempMonth = p->item->month;
-				index = p->item->numinlist;
+				index = listindex;
 				count++;
 			}
-			
 		}
+		listindex++;
 		p = p->next;
 	}
 	if (!count) {
 		printf("\nNo results were found for this request.\n");
 	}else PrintFlightByIndex(list, index);
-	free(p);
+	//free(p);
 	getchar();
 }
