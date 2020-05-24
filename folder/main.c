@@ -11,7 +11,7 @@ int main()
 	errno_t	err;
 	FILE* fPtr;
 	Menu();
-	ClearList(&SomeList);
+	ClearList(SomeList.head);
 	return 0;
 
 }
@@ -24,17 +24,19 @@ void FlightsMenu() {
 			"1.View all flights\n"
 			"2.Search\n"
 			"3.Add a flight\n"
-			"4.Print ticket\n"
-			"5.Back\n"
+			"4.Delete a flight\n"
+			"5.Print ticket\n"
+			"6.Back\n"
 		);
 		switch (key)
 		{
 		case '1':PrintAllFlights(&SomeList); break;
-		case '2':Search(&SomeList);
-		case '3':AddFlightInList(&SomeList);
-		case'5':break;
+		case '2':Search(&SomeList); break;
+		case '3':AddFlightInList(&SomeList); break;
+		case '4':DeleteMenu(&SomeList); break;
+		case '6':break;
 		default:
 			break;
 		}
-	} while (key != '5');
+	} while (key != '6');
 }
