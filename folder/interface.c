@@ -35,3 +35,4 @@ void Ad()
 	printf("------BELAVIA - Belarusian Airlines------\n");
 	printf("-14A, Nemiga str., Minsk,Belarus, 220004-\n");
 }
+
