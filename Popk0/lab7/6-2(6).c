@@ -240,7 +240,7 @@ int main()
                 }
                 temp = temp->next;
             }
-            DeleteDList(collectionOfItems); //очистка памяти
+            DeleteDList(collectionOfItems); //очистка памятиии
             break;
         }
         system("cls");
