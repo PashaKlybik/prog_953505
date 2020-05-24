@@ -7,6 +7,7 @@ typedef enum {
 } Month;
 char* GetMonth(Month month);
 typedef struct flight {
+	int isdeleted;
 	int numinlist;
 	char flight_number[7];
 	char destination[15];
@@ -35,5 +36,7 @@ extern void PrintAllFlights(List* list);
 extern void Search(List* list);
 extern void AppropriateRace(List* list);
 extern void PrintFlightByIndex(List* list, int index);
+void DeleteFromList(List* list, int index);
+void DeleteMenu(List* list);
 extern void AddFlightInList(List* list);
 #endif // !STRUCTS_H
