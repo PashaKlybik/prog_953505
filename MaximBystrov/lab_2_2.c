@@ -3,6 +3,7 @@
 #include <stdio.h>	
 int factorization(int n);
 int calculation(double radians, int n);
+int recursion(double radians, double result, double e, int y);
 int x;
 int factorization(int n) {
 	return n <= 1 ? 1 : factorization(n - 1)*n;
@@ -24,6 +25,20 @@ int calculation(double radians, int n)
 		}
 	}
 	return 0;
+}
+int recursion(double radians, double result, double e, int y) {
+	
+	e = y - 1;
+	double a = pow(-1, y - 1);
+	double b = pow(radians, (2 * y) - 1);
+	double c = factorization((2 * y) - 1);
+	result += (a * b) / (long double)c;
+	if (result - sin(radians) < e)
+	{
+		printf("S(x) - %Lf\n", result);
+		return y;
+	}
+	return recursion(radians, result, e, y += 1);
 }
 int main()
 {
