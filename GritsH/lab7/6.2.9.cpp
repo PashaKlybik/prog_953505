@@ -206,7 +206,7 @@ int main()
 			choice = NULL;
 		}
 	}
-	printf_s("Please enter the index of the hotel u'd like too book\n");
+	printf_s("\nPlease enter the index of the hotel u'd like to book\n");
 	printf_s("*index is written in [ ]\nInput: ");
 	int bookedIndex = 0;
 	while (true)
@@ -224,14 +224,14 @@ int main()
 		else
 		{
 			printf_s("\nIndex doesn't exist, try again\n");
-			printf_s("If you want to leave the programm enter -1");
+			printf_s("If you want to leave the programm enter -1: ");
 			getchar();
 			bookedIndex = NULL;
 		}
 	}
 	if (reserveRoom(hotels, amountOfHotels, bookedIndex))
 	{
-		printf_s("\nU booked hotel <%s> located at <%s, %s>\n", hotels[i].hotelName, hotels[i].city, hotels[i].address);
+		printf_s("Operation complete succsessfully!");
 	}
 	free(hotels);
 	return 0;
