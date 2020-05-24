@@ -107,7 +107,7 @@ int main()
 {
 	{
 		FILE* capitalsdata;
-		char* pathCapitals = "D:\\BSUIR\\Tapping\\C\\LR_7\\capitalssave.txt";		
+		char* pathCapitals = "...\\capitalsdata.txt";		
 		capitalsdata = fopen(pathCapitals, "rb");
 		if (!capitalsdata)
 		{
@@ -118,7 +118,7 @@ int main()
 
 		fclose(capitalsdata);
 		FILE* trucksdata;
-		char* pathTrucks = "D:\\BSUIR\\Tapping\\C\\LR_7\\truckssave.txt";
+		char* pathTrucks = "...\\trucksdata.txt";
 		trucksdata = fopen(pathTrucks, "rb");
 		
 		if (!trucksdata)
