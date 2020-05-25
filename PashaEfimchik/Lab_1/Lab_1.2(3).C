@@ -15,7 +15,6 @@
 void Definition()
 {
 	int a = 0, i = 1, b;
-
 	printf("\nВведите номер числа последовательности: ");
 
 	while (!scanf_s("%d", &a) || a <= 0)
