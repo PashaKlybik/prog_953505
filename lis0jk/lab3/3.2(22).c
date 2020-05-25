@@ -25,6 +25,8 @@ float Count(float* h, float* s, float l, int count)
 	}
 	square = ah * l;
 	sp = square * as;
+	delete[] h;
+	delete[] s;
 	return sp;
 }
 
