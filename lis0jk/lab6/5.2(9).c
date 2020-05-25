@@ -5,57 +5,103 @@
 двоичным представлением числа (‘1’ – переход к правому потомку,
 ‘0’ – переход к левому потомку).*/
 
-#include <string.h>
-#include <stdio.h>
 #include <stdlib.h>
-#include <string>
-#include <math.h>
-#include <stack>
+#include <stdio.h>
 
-struct Node
+//возвращает размер файла
+long int filesize(FILE* fp)
 {
-    std::string field;           
-    struct Node* left;  
-    struct Node* right; 
+    long int save_pos, size_of_file;
+    save_pos = ftell(fp);
+    fseek(fp, 0L, SEEK_END);
+    size_of_file = ftell(fp);
+    fseek(fp, save_pos, SEEK_SET);
+    return(size_of_file);
+}
+//структура, описывающая дерево
+struct tree 
+{
+    int info;
+    struct tree* left;
+    struct tree* right;
 };
 
-void treeprint(Node* tree) 
+struct tree* root; // начальная вершина дерева 
+void print_tree(struct tree* root, int l, int);//выводит дерево на экран
+void treeremove(tree* root); // удаляет дерево
+struct tree* TreeBuilder(int n)//создаем пустое дерево
 {
-    if (tree != NULL) 
-    { 
-        treeprint(tree->left); 
-        if (tree->field != "NULL") printf("%s ", tree->field.c_str());
-        treeprint(tree->right); 
+    struct tree* r = (struct tree*) malloc(sizeof(struct tree));
+    if (n > 0) 
+    {
+        int a = -1;
+        r->info = a;
+        r->right = TreeBuilder(n - 1);
+        r->left = TreeBuilder(n - 1);
+
     }
+    else 
+    {
+        r->right = NULL;
+        r->left = NULL;
+    }
+    return r;
 }
 
-void addnode(std::string x, Node*& tree, std::string x_full, int count) 
+int main(void)
 {
-    if (tree == NULL) 
+    FILE* fp;
+    char file[100];
+    char* a;
+    fopen_s(&fp, "Text.txt", "r");
+    int countNum = 1;
+    if (!fp) printf("AAAAAAAAAAAA");
+    a = fgets(file, sizeof(file), fp);
+    for (int i = 0; i < filesize(fp); i++)
+        if (a[i] == ' ') countNum++;
+    countNum++;
+    root = TreeBuilder(countNum);  // инициализация корня дерева     
+    for (int i = 0, j = 0; i < countNum - 1; i++, j++) //заполняем дерево
     {
-        tree = new Node; 
-        tree->field = "NULL";
-        tree->left = NULL;
-        tree->right = NULL; 
-    }
-
-    if (x == "1" || x == "0")
-    {
-        if (x == "1")
+        tree* temp = root;
+        for (;; j++) 
         {
-            Node* tree_new = new Node;
-            tree_new->right = tree_new->left = NULL;
-            tree->right = tree_new;
-            x_full.resize(6);
-            tree_new->field = x_full;
+            if (a[j] == '0') temp = temp->left;                        
+            else if (a[j] == '1') temp = temp->right;           
+            if (temp->right->right == NULL) 
+            {
+                temp->info = 1;
+                for (int k = j, l = 0; k != 0 && a[k] != ' '; k--, l++)                 
+                    if (a[k] == '1') temp->info += (2 << (l - 1));               
+                break;
+            }
         }
-        else
-        {
-            Node* tree_new = new Node;
-            tree_new->right = tree_new->left = NULL;
-            tree->left = tree_new;
-            x_full.resize(6);
-            tree_new->field = x_full;
+    }
+    fclose(fp);
+    print_tree(root, 0, countNum);
+    treeremove(root);
+    return 0;
+}
+
+void print_tree(struct tree* r, int l, int n)
+{
+    int i;
+    if (l > n - 1) return;
+    print_tree(r->right, l + 1, n);
+    for (i = 0; i < l; ++i) printf("                 ");
+    printf("%d\n", r->info);
+    print_tree(r->left, l + 1, n);
+}
+
+void treeremove(tree* root)
+{
+    if (root != NULL)
+    {
+        treeremove(root->left);
+        treeremove(root->right);
+        free(root);
+    }
+}ree_new->field = x_full;
         } // заполняем ячейку, если убедились, что спустились вниз
         return;
     }
