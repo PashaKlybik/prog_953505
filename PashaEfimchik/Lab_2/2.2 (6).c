@@ -10,7 +10,6 @@
 #include <math.h>
 #include <time.h>
 
-
 double fact(double x)
 {
 	if (x <= 0)
