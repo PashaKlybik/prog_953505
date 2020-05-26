@@ -1,0 +1,59 @@
+//IDE: VisualStudio
+//Task 3.2(22)
+/*
+Волга-матушка. Гидрологами произведена серия замеров по прямой от берега до берега реки перпендикулярно фарватеру. 
+Получены данные: si – расстояние от левого берега, м; hi – глубина реки, м; 
+vi – скорость течения, м/с, i = 1, 2,..., n. 
+Каков расход воды в сечении, т.е. сколько кубометров воды протекает через сечение реки в секунду?
+*/
+#include "stdlib.h"
+#include "stdio.h"
+#include <math.h>
+#include<clocale>
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	int n;
+	printf("Введите количество замеров: ");
+	scanf_s("%d", &n);
+	double area = 0, speed = 0, res = 1;
+	double* s = new double[n];
+	double* h = new double[n];
+	double* v = new double[n];
+	for (int i = 0; i < n; i++)
+	{
+		printf("%d-е Расстояние от левого берега: ", i + 1);
+		scanf_s("%lf", &s[i]);
+	}
+	for (int i = 0; i < n; i++)
+	{
+		printf("%d-я Глубина реки: ", i + 1);
+		scanf_s("%lf", &h[i]);
+	}
+	for (int i = 0; i < n; i++)
+	{
+		printf("%d-я Cкорость течения реки: ", i + 1);
+		scanf_s("%lf", &v[i]);
+	}
+	for (int i = 0; i < n; i++)
+	{
+		if (i == 0)
+		{
+			area += (s[i] + h[i]) / 2;
+		}
+		else if (i == n - 1)
+		{
+			area += ((s[i] - s[i - 1]) + h[i]) / 2;
+		}
+		else {
+			area += ((h[i] + h[i - 1]) / 2) * s[i];
+		}
+		speed += v[i];
+	}
+	speed /= n;
+	res = area * speed;
+	printf("\n%.3f - кубометров воды протекает через сечение реки в секунду.", res);
+	
+	return 0;
+}
