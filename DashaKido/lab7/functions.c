@@ -55,12 +55,12 @@ int is_name_unique(int namespace, char* name)
 }
 void display_song(song one)
 {
-	printf("Песня ");
+	printf("ГЏГҐГ±Г­Гї ");
 	out_str_wo_nl(one.name);
 	printf(":\n");
 	if (one.lyrics->num_of_lines != 0)
 	{
-		printf("Текст:\n");
+		printf("Г’ГҐГЄГ±ГІ:\n");
 		int i = 0;
 		for (; i < one.lyrics->num_of_lines; i++)
 			printf("\t%s", one.lyrics->lines[i]);
@@ -76,14 +76,14 @@ void display_release(id release_id)
 	printf("%s", (one->type == 0 ? "Composition " : one->type == 1 ? "Single " :
 		one->type == 2 ? "LP " : one->type == 3 ? "EP " : "Mixtape "));
 	out_str_wo_nl(one->name);
-	printf(" от ");
+	printf(" Г®ГІ ");
 	box* tmp = get_item_by_id(one->authors[0]);
 	if (tmp->u != NULL) out_str_wo_nl(tmp->u->name);
 	else out_str_wo_nl(tmp->g->image->name);
 	if (one->num_of_authors > 1)
 	{
 		int i = 1;
-		printf("\nАвторы: ");
+		printf("\nГЂГўГІГ®Г°Г»: ");
 		for (; i < one->num_of_authors; i++)
 		{
 			box* tmp = get_item_by_id(one->authors[i]);
@@ -112,10 +112,10 @@ void main_menu()
 		do
 		{
 			system("cls");
-			printf("Нажмите:\t Для:\n\n");
-			printf(" 1\t\t Регистрация.\n");
-			printf(" 2\t\t Вход.\n");
-			printf(" 0\t\t Выход.\n");
+			printf("ГЌГ Г¦Г¬ГЁГІГҐ:\t Г„Г«Гї:\n\n");
+			printf(" 1\t\t ГђГҐГЈГЁГ±ГІГ°Г Г¶ГЁГї.\n");
+			printf(" 2\t\t Г‚ГµГ®Г¤.\n");
+			printf(" 0\t\t Г‚Г»ГµГ®Г¤.\n");
 			chinput = _getch();
 		} while (chinput != '0' && chinput != '1' && chinput != '2');
 		if (chinput == '0')	break;
@@ -129,7 +129,7 @@ void sign_up()
 	char user_or_group;
 	do
 	{
-		printf("Вы пользователь/артист(a) или группа(g)? \n");
+		printf("Г‚Г» ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј/Г Г°ГІГЁГ±ГІ(a) ГЁГ«ГЁ ГЈГ°ГіГЇГЇГ (g)? \n");
 		user_or_group = _getch();
 	} while (user_or_group != 'a' && user_or_group != 'g');
 	int num_of_members = 0;
@@ -139,7 +139,7 @@ void sign_up()
 		char when;
 		do
 		{
-			printf("\nВы хотите добавить участников сразу(r) или потом(l)? \n");
+			printf("\nГ‚Г» ГµГ®ГІГЁГІГҐ Г¤Г®ГЎГ ГўГЁГІГј ГіГ·Г Г±ГІГ­ГЁГЄГ®Гў Г±Г°Г Г§Гі(r) ГЁГ«ГЁ ГЇГ®ГІГ®Г¬(l)? \n");
 			when = _getch();
 		} while (when != 'r' && when != 'l');
 		if (when == 'r')
@@ -150,34 +150,34 @@ void sign_up()
 				id new_member = select_one(1, 0, 0);
 				if (new_member == -1)
 				{
-					printf("Никто не был выбран. ");
+					printf("ГЌГЁГЄГІГ® Г­ГҐ ГЎГ»Г« ГўГ»ГЎГ°Г Г­. ");
 				}
 				else if (is_among(members, num_of_members, new_member))
 				{
-					printf("Этот пользователь уже находится в группе.");
+					printf("ГќГІГ®ГІ ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј ГіГ¦ГҐ Г­Г ГµГ®Г¤ГЁГІГ±Гї Гў ГЈГ°ГіГЇГЇГҐ.");
 				}
 				else
 				{
 					members = (id*)realloc(members, sizeof(id) * (num_of_members + 1));
 					if (members == NULL) report_merror();
 					members[num_of_members++] = new_member;
-					printf("Этот пользователь был добавлен в группу.");
+					printf("ГќГІГ®ГІ ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј ГЎГ»Г« Г¤Г®ГЎГ ГўГ«ГҐГ­ Гў ГЈГ°ГіГЇГЇГі.");
 				}
-				printf("Нажмите (n) если этого достаточно. ");
+				printf("ГЌГ Г¦Г¬ГЁГІГҐ (n) ГҐГ±Г«ГЁ ГЅГІГ®ГЈГ® Г¤Г®Г±ГІГ ГІГ®Г·Г­Г®. ");
 				printf("Press n if it\'s enough: ");
 				chinput = _getch();
 			} while (chinput != 'n');
 		}
 	}
 	char* name;
-	printf("\nВведите ");
-	if (user_or_group == 'a') printf("Ваше имя: ");
-	else printf("Название группы: ");
+	printf("\nГ‚ГўГҐГ¤ГЁГІГҐ ");
+	if (user_or_group == 'a') printf("Г‚Г ГёГҐ ГЁГ¬Гї: ");
+	else printf("ГЌГ Г§ГўГ Г­ГЁГҐ ГЈГ°ГіГЇГЇГ»: ");
 	name = get_string(stdin);
 	while (!is_name_unique(2, name))
 	{
 		free(name);
-		printf("\nУже есть пользователь с таким именем. Попробуйте снова... ");
+		printf("\nГ“Г¦ГҐ ГҐГ±ГІГј ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј Г± ГІГ ГЄГЁГ¬ ГЁГ¬ГҐГ­ГҐГ¬. ГЏГ®ГЇГ°Г®ГЎГіГ©ГІГҐ Г±Г­Г®ГўГ ... ");
 		name = get_string(stdin);
 	}
 	if (user_or_group == 'a')
@@ -229,25 +229,25 @@ id select_one(int among_users, int among_groups, int among_releases)
 	id* available = filtered(options, &num_of_options, tag);
 	while (1)
 	{
-		printf("\nВведите:\t\tдля выбора\n\n 0\t\t Выход\n");
+		printf("\nГ‚ГўГҐГ¤ГЁГІГҐ:\t\tГ¤Г«Гї ГўГ»ГЎГ®Г°Г \n\n 0\t\t Г‚Г»ГµГ®Г¤\n");
 		for (i = 0; i < num_of_available; i++)
 		{
 			box* tmp = get_item_by_id(available[i]);
 			int index = tmp->g != NULL ? 0 :
 				tmp->r != NULL ? 1 : tmp->u->name != NULL ? 2 : -1;
-			printf(" %d\t\t %s: ", i + 1, index == 0 ? "группа" :
-				index == 1 ? "композиция" : index == 2 ? "пользователь" : NULL);
+			printf(" %d\t\t %s: ", i + 1, index == 0 ? "ГЈГ°ГіГЇГЇГ " :
+				index == 1 ? "ГЄГ®Г¬ГЇГ®Г§ГЁГ¶ГЁГї" : index == 2 ? "ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј" : NULL);
 			out_str_wo_nl(tmp->g != NULL ? tmp->g->image->name : tmp->r != NULL ? tmp->r->name :
 				tmp->u->name != NULL ? tmp->u->name : NULL);
 			printf("\n");
 			free(tmp);
 		}
-		printf("\nНажмите на (ENTER) для выбора: ");
+		printf("\nГЌГ Г¦Г¬ГЁГІГҐ Г­Г  (ENTER) Г¤Г«Гї ГўГ»ГЎГ®Г°Г : ");
 		free(tag);
 		tag = get_string(stdin);
 		if (length_of(tag) == 2)
 		{
-			printf("\nВведите номер опции: ");
+			printf("\nГ‚ГўГҐГ¤ГЁГІГҐ Г­Г®Г¬ГҐГ° Г®ГЇГ¶ГЁГЁ: ");
 			int chinput, option = 0;
 			while ((chinput = fgetc(stdin)) >= '0' && chinput <= '9')
 				option = option * 10 + chinput - '0';
@@ -331,12 +331,12 @@ void session(id you)
 	{
 		system("cls");
 		out_str_wo_nl(user_you->name);
-		printf("\n\tПолный отчет: %d$,\n\tДоход: %d$.\n\n",
+		printf("\n\tГЏГ®Г«Г­Г»Г© Г®ГІГ·ГҐГІ: %d$,\n\tГ„Г®ГµГ®Г¤: %d$.\n\n",
 			user_you->full_account, user_you->revenue);
 		if (group_you != NULL)
 		{
-			printf("\tУчастники: ");
-			if (group_you->num_of_members == 0)	printf("Никто.\n\n");
+			printf("\tГ“Г·Г Г±ГІГ­ГЁГЄГЁ: ");
+			if (group_you->num_of_members == 0)	printf("ГЌГЁГЄГІГ®.\n\n");
 			else
 			{
 				int i = 0;
@@ -352,33 +352,33 @@ void session(id you)
 				printf("\b\b.\n\n");
 			}
 		}
-		printf("Нажмите:\t Для:\n"
-			" 1\t\t добавить деньги\n"
-			" 2\t\t выпустить пластинку\n"
-			" 3\t\t купить пластинку\n"
-			" 4\t\t увидеть мои пластинки\n");
+		printf("ГЌГ Г¦Г¬ГЁГІГҐ:\t Г„Г«Гї:\n"
+			" 1\t\t Г¤Г®ГЎГ ГўГЁГІГј Г¤ГҐГ­ГјГЈГЁ\n"
+			" 2\t\t ГўГ»ГЇГіГ±ГІГЁГІГј ГЇГ«Г Г±ГІГЁГ­ГЄГі\n"
+			" 3\t\t ГЄГіГЇГЁГІГј ГЇГ«Г Г±ГІГЁГ­ГЄГі\n"
+			" 4\t\t ГіГўГЁГ¤ГҐГІГј Г¬Г®ГЁ ГЇГ«Г Г±ГІГЁГ­ГЄГЁ\n");
 		if (group_you != NULL)
 		{
-			printf(" 5 \t\t добавить участника\n"
-				" 6\t\t удалить участника\n");
+			printf(" 5 \t\t Г¤Г®ГЎГ ГўГЁГІГј ГіГ·Г Г±ГІГ­ГЁГЄГ \n"
+				" 6\t\t ГіГ¤Г Г«ГЁГІГј ГіГ·Г Г±ГІГ­ГЁГЄГ \n");
 		}
-		printf(" 0\t\t выйти\n");
+		printf(" 0\t\t ГўГ»Г©ГІГЁ\n");
 		chinput = _getch();
-		if (chinput == '1') //добавить деньги
+		if (chinput == '1') //Г¤Г®ГЎГ ГўГЁГІГј Г¤ГҐГ­ГјГЈГЁ
 		{
 			system("cls");
-			printf("Введите сумму: ");
+			printf("Г‚ГўГҐГ¤ГЁГІГҐ Г±ГіГ¬Г¬Гі: ");
 			add_money(you);
 		}
-		else if (chinput == '2') //выпустить пластинку
+		else if (chinput == '2') //ГўГ»ГЇГіГ±ГІГЁГІГј ГЇГ«Г Г±ГІГЁГ­ГЄГі
 		{
 			release_a_record(you);
 		}
-		else if (chinput == '3') //купить пластинку
+		else if (chinput == '3') //ГЄГіГЇГЁГІГј ГЇГ«Г Г±ГІГЁГ­ГЄГі
 		{
 			buy_a_record(you);
 		}
-		else if (chinput == '4') //увидеть мои пластинки
+		else if (chinput == '4') //ГіГўГЁГ¤ГҐГІГј Г¬Г®ГЁ ГЇГ«Г Г±ГІГЁГ­ГЄГЁ
 		{
 			int i = 0;
 			for (; i < user_you->num_of_purchased_releases; i++)
@@ -386,38 +386,38 @@ void session(id you)
 				display_release(user_you->purchased_releases[i]);
 				printf("\n**************************************\n");
 			}
-			printf("\nНажмите любую клавишу, чтобы вернуться в свой аккаунт...");
+			printf("\nГЌГ Г¦Г¬ГЁГІГҐ Г«ГѕГЎГіГѕ ГЄГ«Г ГўГЁГёГі, Г·ГІГ®ГЎГ» ГўГҐГ°Г­ГіГІГјГ±Гї Гў Г±ГўГ®Г© Г ГЄГЄГ ГіГ­ГІ...");
 			_getch();
 		}
-		else if (chinput == '5' && group_you != NULL) //добавить участников
+		else if (chinput == '5' && group_you != NULL) //Г¤Г®ГЎГ ГўГЁГІГј ГіГ·Г Г±ГІГ­ГЁГЄГ®Гў
 		{
 			id new_member = select_one(1, 0, 0);
 			if (is_among(group_you->members, group_you->num_of_members, new_member))
 			{
-				printf("Этот пользователь уже находится в группе.");
-				printf("Нажмите любую клавишу, чтобы вернуться в свой аккаунт...");
+				printf("ГќГІГ®ГІ ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј ГіГ¦ГҐ Г­Г ГµГ®Г¤ГЁГІГ±Гї Гў ГЈГ°ГіГЇГЇГҐ.");
+				printf("ГЌГ Г¦Г¬ГЁГІГҐ Г«ГѕГЎГіГѕ ГЄГ«Г ГўГЁГёГі, Г·ГІГ®ГЎГ» ГўГҐГ°Г­ГіГІГјГ±Гї Гў Г±ГўГ®Г© Г ГЄГЄГ ГіГ­ГІ...");
 				_getch();
 				continue;
 			}
 			group_you->members = (id*)realloc(group_you->members, sizeof(id) * group_you->num_of_members + 1);
 			if (group_you->members == NULL) report_merror();
 			group_you->members[group_you->num_of_members++] = new_member;
-			printf("Этот пользователь был добавлен в группу.");
-			printf("Нажмите любую клавишу, чтобы вернуться в свой аккаунт...");
+			printf("ГќГІГ®ГІ ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј ГЎГ»Г« Г¤Г®ГЎГ ГўГ«ГҐГ­ Гў ГЈГ°ГіГЇГЇГі.");
+			printf("ГЌГ Г¦Г¬ГЁГІГҐ Г«ГѕГЎГіГѕ ГЄГ«Г ГўГЁГёГі, Г·ГІГ®ГЎГ» ГўГҐГ°Г­ГіГІГјГ±Гї Гў Г±ГўГ®Г© Г ГЄГЄГ ГіГ­ГІ...");
 			_getch();
 
 		}
-		else if (chinput == '6' && group_you != NULL) //удалить участника
+		else if (chinput == '6' && group_you != NULL) //ГіГ¤Г Г«ГЁГІГј ГіГ·Г Г±ГІГ­ГЁГЄГ 
 		{
 			if (group_you->num_of_members == 0)
 			{
-				printf("Здесь некого удалять.");
-				printf("Нажмите любую клавишу, чтобы вернуться в свой аккаунт...");
+				printf("Г‡Г¤ГҐГ±Гј Г­ГҐГЄГ®ГЈГ® ГіГ¤Г Г«ГїГІГј.");
+				printf("ГЌГ Г¦Г¬ГЁГІГҐ Г«ГѕГЎГіГѕ ГЄГ«Г ГўГЁГёГі, Г·ГІГ®ГЎГ» ГўГҐГ°Г­ГіГІГјГ±Гї Гў Г±ГўГ®Г© Г ГЄГЄГ ГіГ­ГІ...");
 				_getch();
 				continue;
 			}
-			printf("Кого бы вы хотели убрать?\nВведите:\t\tTДля удаления:\n\n");
-			printf(" 0\t\t Никого\n");
+			printf("ГЉГ®ГЈГ® ГЎГ» ГўГ» ГµГ®ГІГҐГ«ГЁ ГіГЎГ°Г ГІГј?\nГ‚ГўГҐГ¤ГЁГІГҐ:\t\tTГ„Г«Гї ГіГ¤Г Г«ГҐГ­ГЁГї:\n\n");
+			printf(" 0\t\t ГЌГЁГЄГ®ГЈГ®\n");
 			int i = 0;
 			for (; i < group_you->num_of_members; i++)
 			{
@@ -442,8 +442,8 @@ void session(id you)
 				group_you->members[choice - 1] = group_you->members[choice];
 			group_you->members = (id*)realloc(group_you->members, --group_you->num_of_members * sizeof(id));
 			if (group_you->members == NULL)	report_merror();
-			printf("Этот пользователь был удален из группы.");
-			printf("Нажмите любую клавишу, чтобы вернуться в свой аккаунт...");
+			printf("ГќГІГ®ГІ ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј ГЎГ»Г« ГіГ¤Г Г«ГҐГ­ ГЁГ§ ГЈГ°ГіГЇГЇГ».");
+			printf("ГЌГ Г¦Г¬ГЁГІГҐ Г«ГѕГЎГіГѕ ГЄГ«Г ГўГЁГёГі, Г·ГІГ®ГЎГ» ГўГҐГ°Г­ГіГІГјГ±Гї Гў Г±ГўГ®Г© Г ГЄГЄГ ГіГ­ГІ...");
 			_getch();
 		}
 	} while (chinput != '0');
@@ -455,14 +455,14 @@ void add_money(id you)
 	int sum = get_int();
 	if (sum < 0 || MAX_INT - user_you->full_account < sum)
 	{
-		printf("\nНевозможно добавить так много денег.");
-		printf("\nНажмите любую клавишу, чтобы вернуться в свой аккаунт...");
+		printf("\nГЌГҐГўГ®Г§Г¬Г®Г¦Г­Г® Г¤Г®ГЎГ ГўГЁГІГј ГІГ ГЄ Г¬Г­Г®ГЈГ® Г¤ГҐГ­ГҐГЈ.");
+		printf("\nГЌГ Г¦Г¬ГЁГІГҐ Г«ГѕГЎГіГѕ ГЄГ«Г ГўГЁГёГі, Г·ГІГ®ГЎГ» ГўГҐГ°Г­ГіГІГјГ±Гї Гў Г±ГўГ®Г© Г ГЄГЄГ ГіГ­ГІ...");
 		_getch();
 		return;
 	}
 	user_you->full_account += sum;
-	printf("\n%d$ было добавлено на ваш аккаунт.", sum);
-	printf("\nНажмите любую клавишу, чтобы вернуться в свой аккаунт...");
+	printf("\n%d$ ГЎГ»Г«Г® Г¤Г®ГЎГ ГўГ«ГҐГ­Г® Г­Г  ГўГ Гё Г ГЄГЄГ ГіГ­ГІ.", sum);
+	printf("\nГЌГ Г¦Г¬ГЁГІГҐ Г«ГѕГЎГіГѕ ГЄГ«Г ГўГЁГёГі, Г·ГІГ®ГЎГ» ГўГҐГ°Г­ГіГІГјГ±Гї Гў Г±ГўГ®Г© Г ГЄГЄГ ГіГ­ГІ...");
 	_getch();
 	return;
 }
@@ -473,18 +473,18 @@ void release_a_record(id you)
 	group* group_you = get_group_by_id(you);
 	if (user_you == NULL) return;
 	release* new_one = new_release();
-	printf("Эта песня...\n"
+	printf("ГќГІГ  ГЇГҐГ±Г­Гї...\n"
 		"Composition(1)\tSingle(2)\tLP(3)\tEP(4)\tMixtape(5)?");
 	do
 	{
 		new_one->type = _getch() - '1';
 	} while (new_one->type < 0 || new_one->type > 4);
-	printf("\nВведите название пластинки: ");
+	printf("\nГ‚ГўГҐГ¤ГЁГІГҐ Г­Г Г§ГўГ Г­ГЁГҐ ГЇГ«Г Г±ГІГЁГ­ГЄГЁ: ");
 	char* tmp = get_string(stdin);
 	if (length_of(tmp) == 2)
 	{
 		free(tmp);
-		tmp = "Без названия\n";
+		tmp = "ГЃГҐГ§ Г­Г Г§ГўГ Г­ГЁГї\n";
 	}
 	new_one->name = tmp;
 	new_one->num_of_authors = 1 + (group_you != NULL ? group_you->num_of_members : 0);
@@ -502,24 +502,24 @@ void release_a_record(id you)
 		new_one->release_id;
 	do
 	{
-		printf("\nВведите дату выпуска: ");
+		printf("\nГ‚ГўГҐГ¤ГЁГІГҐ Г¤Г ГІГі ГўГ»ГЇГіГ±ГЄГ : ");
 		new_one->dropped = set_date();
 	} while (new_one->dropped == NULL);
 	do
 	{
-		printf("\nВведите количество песен на пластинке: ");
+		printf("\nГ‚ГўГҐГ¤ГЁГІГҐ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЇГҐГ±ГҐГ­ Г­Г  ГЇГ«Г Г±ГІГЁГ­ГЄГҐ: ");
 		new_one->num_of_songs = get_int();
 	} while (new_one->num_of_songs <= 0 || new_one->num_of_songs > SONGS_ON_THE_RECORD_UPPER_LIMIT);
 	new_one->songs = (song*)malloc(sizeof(song) * new_one->num_of_songs);
 	i = 0;
 	for (; i < new_one->num_of_songs; i++)
 	{
-		printf("\nУстановите песню #%d:\n", i + 1);
+		printf("\nГ“Г±ГІГ Г­Г®ГўГЁГІГҐ ГЇГҐГ±Г­Гѕ #%d:\n", i + 1);
 		new_one->songs[i] = set_song();
 	}
 	do
 	{
-		printf("\nВведите цену пластинки: ");
+		printf("\nГ‚ГўГҐГ¤ГЁГІГҐ Г¶ГҐГ­Гі ГЇГ«Г Г±ГІГЁГ­ГЄГЁ: ");
 		new_one->price = get_int();
 	} while (new_one->price <= 0);
 	user_you->releases = (id*)realloc(user_you->releases, sizeof(id) * (user_you->num_of_releases + 1));
@@ -550,12 +550,12 @@ void buy_a_record(id you)
 	if (is_among(user_you->purchased_releases, user_you->num_of_purchased_releases,
 		selected->release_id))
 	{
-		printf("Она уже и так ваша.");
-		printf("\nНажмите любую клавишу, чтобы вернуться в свой аккаунт...");
+		printf("ГЋГ­Г  ГіГ¦ГҐ ГЁ ГІГ ГЄ ГўГ ГёГ .");
+		printf("\nГЌГ Г¦Г¬ГЁГІГҐ Г«ГѕГЎГіГѕ ГЄГ«Г ГўГЁГёГі, Г·ГІГ®ГЎГ» ГўГҐГ°Г­ГіГІГјГ±Гї Гў Г±ГўГ®Г© Г ГЄГЄГ ГіГ­ГІ...");
 		_getch();
 		return;
 	}
-	printf("\n%sВы действительно хотите ее купить за %d$? (y / n) ", selected->name, selected->price);
+	printf("\n%sГ‚Г» Г¤ГҐГ©Г±ГІГўГЁГІГҐГ«ГјГ­Г® ГµГ®ГІГЁГІГҐ ГҐГҐ ГЄГіГЇГЁГІГј Г§Г  %d$? (y / n) ", selected->name, selected->price);
 	int chinput;
 	do
 	{
@@ -565,8 +565,8 @@ void buy_a_record(id you)
 	{
 		if (user_you->full_account < selected->price)
 		{
-			printf("\nУ вас недостаточно средств.");
-			printf("\nНажмите любую клавишу, чтобы вернуться в свой аккаунт...");
+			printf("\nГ“ ГўГ Г± Г­ГҐГ¤Г®Г±ГІГ ГІГ®Г·Г­Г® Г±Г°ГҐГ¤Г±ГІГў.");
+			printf("\nГЌГ Г¦Г¬ГЁГІГҐ Г«ГѕГЎГіГѕ ГЄГ«Г ГўГЁГёГі, Г·ГІГ®ГЎГ» ГўГҐГ°Г­ГіГІГјГ±Гї Гў Г±ГўГ®Г© Г ГЄГЄГ ГіГ­ГІ...");
 			_getch();
 			return;
 		}
@@ -586,8 +586,8 @@ void buy_a_record(id you)
 			user_you->purchased_releases = (id*)realloc(user_you->purchased_releases,
 				sizeof(id) * (user_you->num_of_purchased_releases + 1));
 			user_you->purchased_releases[user_you->num_of_purchased_releases++] = record_id;
-			printf("\nВы купили ее.");
-			printf("\nНажмите любую клавишу, чтобы вернуться в свой аккаунт...");
+			printf("\nГ‚Г» ГЄГіГЇГЁГ«ГЁ ГҐГҐ.");
+			printf("\nГЌГ Г¦Г¬ГЁГІГҐ Г«ГѕГЎГіГѕ ГЄГ«Г ГўГЁГёГі, Г·ГІГ®ГЎГ» ГўГҐГ°Г­ГіГІГјГ±Гї Гў Г±ГўГ®Г© Г ГЄГЄГ ГіГ­ГІ...");
 			_getch();
 			return;
 		}
@@ -616,17 +616,17 @@ date* set_date()
 song set_song()
 {
 	song new_one;
-	printf("Установите название песни: ");
+	printf("Г“Г±ГІГ Г­Г®ГўГЁГІГҐ Г­Г Г§ГўГ Г­ГЁГҐ ГЇГҐГ±Г­ГЁ: ");
 	new_one.name = get_string(stdin);
 	if (length_of(new_one.name) == 2)
 	{
 		free(new_one.name);
-		new_one.name = "без названия\n";
+		new_one.name = "ГЎГҐГ§ Г­Г Г§ГўГ Г­ГЁГї\n";
 	}
 	int lines_num;
 	do
 	{
-		printf("\nВведите количество строк в тексте песни:");
+		printf("\nГ‚ГўГҐГ¤ГЁГІГҐ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г±ГІГ°Г®ГЄ Гў ГІГҐГЄГ±ГІГҐ ГЇГҐГ±Г­ГЁ:");
 		lines_num = get_int();
 	} while (lines_num < 0 || lines_num > MAX_NUM_OF_LYR_LINES);
 	if (lines_num == 0)
@@ -637,7 +637,7 @@ song set_song()
 	}
 	else
 	{
-		printf("\nВведите текст:\n ");
+		printf("\nГ‚ГўГҐГ¤ГЁГІГҐ ГІГҐГЄГ±ГІ:\n ");
 		new_one.lyrics = get_text(stdin, yes_function, lines_num);
 	}
 	return new_one;
@@ -645,17 +645,17 @@ song set_song()
 //------------------
 void report_merror()
 {
-	printf("\nОшибка памяти\n");
+	printf("\nГЋГёГЁГЎГЄГ  ГЇГ Г¬ГїГІГЁ\n");
 	exit(EXIT_FAILURE);
 }
 void report_uerror()
 {
-	printf("\nЧто-то пошло не так во время чтения файла\n");
+	printf("\nГ—ГІГ®-ГІГ® ГЇГ®ГёГ«Г® Г­ГҐ ГІГ ГЄ ГўГ® ГўГ°ГҐГ¬Гї Г·ГІГҐГ­ГЁГї ГґГ Г©Г«Г \n");
 	exit(EXIT_FAILURE);
 }
 void report_werror()
 {
-	printf("\nЧто-то пошло не так во время чтения файла\n");
+	printf("\nГ—ГІГ®-ГІГ® ГЇГ®ГёГ«Г® Г­ГҐ ГІГ ГЄ ГўГ® ГўГ°ГҐГ¬Гї Г·ГІГҐГ­ГЁГї ГґГ Г©Г«Г \n");
 	exit(EXIT_FAILURE);
 }
 int length_of(char* str)
@@ -833,7 +833,7 @@ text* get_text(FILE* file_or_con, int (*condition_for_reading)(), int max_line_n
 	lines = (char**)malloc(sizeof(char*) * capacity);
 	if (lines == NULL)
 	{
-		printf("\nОшибка памяти.\n");
+		printf("\nГЋГёГЁГЎГЄГ  ГЇГ Г¬ГїГІГЁ.\n");
 		exit(EXIT_FAILURE);
 	}
 	while (condition_for_reading() && (max_line_num == 0 || line_num < max_line_num))
@@ -844,7 +844,7 @@ text* get_text(FILE* file_or_con, int (*condition_for_reading)(), int max_line_n
 			lines = (char**)realloc(lines, sizeof(char*) * (capacity *= 2));
 			if (lines == NULL)
 			{
-				printf("\nОшибка памяти.\n");
+				printf("\nГЋГёГЁГЎГЄГ  ГЇГ Г¬ГїГІГЁ.\n");
 				exit(EXIT_FAILURE);
 			}
 		}
