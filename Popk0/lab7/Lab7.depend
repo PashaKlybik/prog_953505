@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1591220403 source:d:\codeblocks\lab7_c\lab7\eshop.by.c
+	"ClientInformationHeader.h"
+	<stdio.h>
+	<stdlib.h>
+	"windows.h"
+
+1591212712 d:\codeblocks\lab7_c\lab7\productheader.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"Product.h"
+
+1591212766 d:\codeblocks\lab7_c\lab7\product.h
+
+1591213704 d:\codeblocks\lab7_c\lab7\clientinformationheader.h
+	"ClientInformation.h"
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"windows.h"
+
+1591213704 d:\codeblocks\lab7_c\lab7\clientinformation.h
+	<stdlib.h>
+	"windows.h"
+
