@@ -1,10 +1,8 @@
-﻿#include <iostream>
+﻿#include <Windows.h>
 #include <fstream>
-#include <string>
+#include <string.h>
 #include <conio.h>
 #include <vector>
-
-using namespace std;
 
 struct Info
 {
@@ -292,6 +290,7 @@ void FindEntry(vector<Info>& data)
 		printf_s("There's no entries woth matching properties!\nPress any key to return to main menu...\n");
 		_getch();
 	}
+	free(indexes);
 }
 
 void GenderInfoDialog(vector<Info>& data)
@@ -342,6 +341,8 @@ void GenderInfoDialog(vector<Info>& data)
 		printf_s("There's no entries woth matching properties!\nPress any key to return to main menu...\n");
 		_getch();
 	}
+	free(indexes);
+	free(found);
 }
 
 int main()
@@ -431,6 +432,6 @@ int main()
 
 	input.close();
 	output.close();
-
+	free(info);
 	return 0;
 }
