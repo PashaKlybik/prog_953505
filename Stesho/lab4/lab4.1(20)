@@ -1,0 +1,35 @@
+//Task 4.1(20)
+/*
+Определить, является ли периодической последовательностью
+заданная строка, т.е. имеет ли она вид d d ... d, где d – некоторая
+подпоследовательность символов.
+*/
+
+#include <stdio.h>
+#include <string.h>
+#include <locale.h>
+
+int main(void)
+{
+    char str[20];
+    char seq[20];
+    int temp = 1;
+    printf("string = ");
+    gets(str);
+    printf("period = ");
+    gets(seq);
+    for (int i = 0, j = 0; i < strlen(str); i++, j++)
+    {
+        if (str[i] == ' ')
+            i++;
+        //printf("i = %d, j = %d\n", i, j);
+        if (str[i] != seq[j])
+        {
+            printf("\nFalse");
+            return 0;
+        }
+        if (j == (strlen(seq)-1))
+            j = -1;
+    }
+    printf("True");
+}
