@@ -26,15 +26,15 @@ Info Func()
 {
 	system("cls");
 
-	printf_s("\t%s\n", "Регистрационный номер");
-	printf_s("\t%s\n", "ФИО:");
-	printf_s("\t%s\n", "Пол:");
-	printf_s("\t%s\n", "День рождения:");
-	printf_s("\t%s\n", "Рост:");
-	printf_s("\t%s\n", "Вес:");
-	printf_s("\t%s\n", "Город:");
-	printf_s("\t%s\n", "Хобби: ");
-	printf_s("\t%s\n", "Вредные привычки: ");
+	printf_s("\t%s\n", "Reg number");
+	printf_s("\t%s\n", "Fio:");
+	printf_s("\t%s\n", "Male:");
+	printf_s("\t%s\n", "Birhtday:");
+	printf_s("\t%s\n", "height:");
+	printf_s("\t%s\n", "weight:");
+	printf_s("\t%s\n", "city:");
+	printf_s("\t%s\n", "interes: ");
+	printf_s("\t%s\n", "Bad habbits: ");
 
 	string regNumber;
 	string FIO;
@@ -86,15 +86,15 @@ Info Func()
 
 void PrintEntry(Info entry)
 {
-	printf_s("Регистрационный номер:         %s\n", entry.regNumber.c_str());
-	printf_s("ФИО:                           %s\n", entry.FIO.c_str());
-	printf_s("Пол:                           %s\n", entry.male.c_str());
-	printf_s("День рождения:                 %s\n", entry.birthday.c_str());
-	printf_s("Рост:                          %s\n", entry.height.c_str());
-	printf_s("Вес:                           %s\n", entry.weight.c_str());
-	printf_s("Город:                         %s\n", entry.city.c_str());
-	printf_s("Интересы:                      %s\n", entry.interes.c_str());
-	printf_s("Вредные привычки:              %s\n", entry.badHabits.c_str());
+	printf_s("Reg number:         %s\n", entry.regNumber.c_str());
+	printf_s("FIO:                           %s\n", entry.FIO.c_str());
+	printf_s("Male:                           %s\n", entry.male.c_str());
+	printf_s("Birhday:                 %s\n", entry.birthday.c_str());
+	printf_s("Height:                          %s\n", entry.height.c_str());
+	printf_s("Weight:                           %s\n", entry.weight.c_str());
+	printf_s("City:                         %s\n", entry.city.c_str());
+	printf_s("Interes:                      %s\n", entry.interes.c_str());
+	printf_s("Bad Habbits:              %s\n", entry.badHabits.c_str());
 
 }
 
@@ -106,7 +106,7 @@ void Print(vector<Info> info)
 		for (int i = 0; i < info.size(); i++)
 		{
 
-			printf_s("\t\t\tЗапись %d\n", i + 1);
+			printf_s("\t\t\tRecord %d\n", i + 1);
 			PrintEntry(info[i]);
 		}
 
@@ -122,12 +122,12 @@ void Menu()
 {
 	system("cls");
 
-	printf_s(" 1 Вывести информацию\n");
-	printf_s(" 2 Добавить запись\n");
-	printf_s(" 3 Найти запись\n");
-	printf_s(" 4 Сортировка\n");
-	printf_s(" 5 Информация о кандидате\n");
-	printf_s(" 6 Выход\n");
+	printf_s(" 1 Print information\n");
+	printf_s(" 2 Add Record\n");
+	printf_s(" 3 Find Record\n");
+	printf_s(" 4 Sort\n");
+	printf_s(" 5 Information\n");
+	printf_s(" 6 Exit\n");
 
 }
 
@@ -151,24 +151,23 @@ void Edit(Info& entry)
 	string regNumber;
 	string FIO;
 	string male;
-	string hobby;
+	string interes;
 	string weight;
 	string city;
-	string personalInfo;
 	string badHabits;
 	string birthday;
 	string height;
 
 
-	printf_s("%s\n", "Регистрационный номер");
-	printf_s("%s\n", "Имя:");
-	printf_s("%s\n", "Пол:");
-	printf_s("%s\n", "День рождения:");
-	printf_s("%s\n", "Рост:");
-	printf_s("%s\n", "Вес:");
-	printf_s("%s\n", "Город:");
-	printf_s("%s\n", "Хобби: ");
-	printf_s("%s\n", "Вредные привычки: ");
+	printf_s("\t%s\n", "Reg number");
+	printf_s("\t%s\n", "Fio:");
+	printf_s("\t%s\n", "Male:");
+	printf_s("\t%s\n", "Birhtday:");
+	printf_s("\t%s\n", "height:");
+	printf_s("\t%s\n", "weight:");
+	printf_s("\t%s\n", "city:");
+	printf_s("\t%s\n", "interes: ");
+	printf_s("\t%s\n", "Bad habbits: ");
 
 
 
@@ -244,7 +243,7 @@ void Find(vector<Info>& data)
 		for (unsigned int i = 0; i < indexes.size(); i++)
 		{
 
-			printf_s("Запись %d\n", indexes[i] + 1);
+			printf_s("Record %d\n", indexes[i] + 1);
 			PrintEntry(data[indexes[i]]);
 		}
 
@@ -265,9 +264,9 @@ void Find(vector<Info>& data)
 		}
 
 
-		printf_s("\t 1 -  Создать запись.\n");
-		printf_s("\t 2 -  Удалить запись.\n");
-		printf_s("\t 3 -  Выход .\n");
+		printf_s("\t 1 -  Edit.\n");
+		printf_s("\t 2 -  Delete.\n");
+		printf_s("\t 3 -  Exit .\n");
 		int value_2;
 		bool quit = false;
 		scanf_s("%d", &value_2);
@@ -304,7 +303,7 @@ void GenderInfoDialog(vector<Info>& data)
 
 	char tmp[101];
 	string male;
-	printf_s("Введите имя: ");
+	printf_s("Enter name: ");
 	scanf_s("%100s", tmp, 101);
 	male = tmp;
 
@@ -335,7 +334,7 @@ void GenderInfoDialog(vector<Info>& data)
 		for (unsigned int i = 0; i < indexes.size(); i++)
 		{
 			printf_s("%s", string(120, '=').c_str());
-			printf_s("Запись %d\n", indexes[i] + 1);
+			printf_s("Record %d\n", indexes[i] + 1);
 			PrintEntry(data[indexes[i]]);
 		}
 		printf_s("%s", string(120, '=').c_str());
