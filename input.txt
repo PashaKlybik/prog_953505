@@ -1,27 +1,27 @@
 42
-Герман
-Мужской
+German
+Male
 21
 180
 65
-Несвиж
-Футбол
-Алкоголизм
+Nesvizh
+Footbal
+Alcohol
 2234
-Ксюша
-женский
+Ksenya
+female
 4
 155
 45
-Несвиж
-Рисование
-Отсутствуют
+Nesvizh
+art
+non
 323423
-Евгений
-мужской
+Evgen
+male
 31
 200
 110
-Кобрин
-Поесть
-Вредная пища
+Kobrin
+Like a food
+unhealthy dish
