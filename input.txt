@@ -1,8 +1,27 @@
-1
-2
-3
+42
+German
+Male
+21
+180
+65
+Nesvizh
+Footbal
+Alcohol
+2234
+Ksenya
+female
 4
-5643
-34743
-3421
-4121
+155
+45
+Nesvizh
+art
+non
+323423
+Evgen
+male
+31
+200
+110
+Kobrin
+Like a food
+unhealthy dish
